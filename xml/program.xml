@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event name="MeeGo Summit FI">
+	<day name="Friday" date="2011-04-15">
+		<track name="Plenary sessions" location="Finnkino Plevna">
+			<session name="Opening" speaker="Ilkka Lehtinen">
+				<start>09:15</start>
+				<end>09:30</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="TBC" speaker="Valtteri Halla">
+				<start>09:30</start>
+				<end>10:15</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="Coffee">
+				<start>10:15</start>
+				<end>11:00</end>
+				<description>n/a</description>
+			</session>		
+
+			<session name="Hacking your existence" speaker="Carsten Munk">
+				<start>11:00</start>
+				<end>11:45</end>
+				<description>Hacking your existence: the importance of open-ended devices in a MeeGo world</description>
+			</session>
+
+			<session name="TBC">
+				<start>11:45</start>
+				<end>12:30</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="Sposor presentations">
+				<start>12:30</start>
+				<end>12:45</end>
+				<description>n/a</description>
+			</session>			
+			
+			<session name="Lunch">
+				<start>12:45</start>
+				<end>14:00</end>
+				<description>n/a</description>
+			</session>
+			
+			</track>
+
+		<track name="Core and Future" location="New Factory">
+			<session name="Qt" speaker="Michael Samarin">
+				<start>14:05</start>
+				<end>14:45</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="Break">
+				<start>14:45</start>
+				<end>15:30</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="Rapid UX concept design" speaker="Jan Krebber">
+				<start>15:30</start>
+				<end>16:15</end>
+				<description>Not only for mobile applications</description>
+			</session>
+
+			<session name="Break">
+				<start>16:15</start>
+				<end>17:00</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="QML" speaker="TBC">
+				<start>17:00</start>
+				<end>17:45</end>
+				<description>n/a</description>
+			</session>
+		</track>
+
+		<track name="Biz Buzz" location="New Factory">
+			<session name="MeeGo IVI" speaker="Justin Noel">
+				<start>14:05</start>
+				<end>14:45</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="Break">
+				<start>14:45</start>
+				<end>15:30</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="Make money with MeeGo apps" speaker="Björn Taubert">
+				<start>15:30</start>
+				<end>16:15</end>
+				<description>How to distribute and make money with MeeGo apps - Intel AppUp</description>
+			</session>
+
+			<session name="Break">
+				<start>16:15</start>
+				<end>17:00</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="MeeGo QA Tools" speaker="Ville Ilvonen">
+				<start>17:00</start>
+				<end>17:45</end>
+				<description>n/a</description>
+			</session>
+		</track>
+
+		<track name="Hacks and tricks" location="New Factory">
+			<session name="Tracker hands-on" speaker="Adrien Bustany,Ivan Frade">
+				<start>14:05</start>
+				<end>14:45</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="Break">
+				<start>14:45</start>
+				<end>15:30</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="Location awareness in MeeGo" speaker="Henri Bergius">
+				<start>15:30</start>
+				<end>16:15</end>
+				<description></description>
+			</session>
+
+			<session name="Break">
+				<start>16:15</start>
+				<end>17:00</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="Optimizing MeeGo Apps" speaker="Uli Dumschat">
+				<start>17:00</start>
+				<end>17:45</end>
+				<description>Optimizing MeeGo Apps with Intel MeeGo development tools</description>
+			</session>
+		</track>
+		
+		<track name="Meegathon" location="New Factory">
+			<session name="24h hack begins (12:00)">
+				<start>12:00</start>
+				<end>23:59</end>
+			</session>
+		</track>
+	</day>
+	<day name="Saturday" date="2011-04-16">
+		<track name="Core and Future" location="New Factory">
+			<session name="OBS and MeeGo extras" speaker="David Greaves">
+				<start>09:35</start>
+				<end>10:15</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="Break">
+				<start>10:15</start>
+				<end>11:00</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="TBC">
+				<start>11:00</start>
+				<end>11:45</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="Lunch">
+				<start>11:45</start>
+				<end>13:00</end>
+				<description>n/a</description>
+			</session>
+
+		</track>
+
+		<track name="Hacks and tricks" location="New Factory">
+			<session name="MeeGo 1.2 Developer Edition for N900" speaker="Jukka Eklund">
+				<start>09:35</start>
+				<end>10:15</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="Break">
+				<start>10:15</start>
+				<end>11:00</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="MARDrone - AR in MeeGo with Qt" speaker="Kate Alhola">
+				<start>11:00</start>
+				<end>11:45</end>
+				<description></description>
+			</session>
+		</track>
+		
+		<track name="Meegathon" location="New Factory">
+			<session name="24h hack ends (12:00)">
+				<start>00:00</start>
+				<end>12:00</end>
+			</session>
+		</track>		
+
+		<track name="Afternoon" location="New Factory">
+			<session name="Lunch">
+				<start>11:45</start>
+				<end>13:00</end>
+				<description></description>
+			</session>		
+		
+			<session name="Meegathon demonstrations">
+				<start>13:00</start>
+				<end>14:00</end>
+				<description></description>
+			</session>
+		
+			<session name="Panel" speaker="Tommi Mikkonen">
+				<start>14:00</start>
+				<end>14:45</end>
+				<description>Discussion panel moderated by Prof. Tommi Mikkonen</description>
+			</session>
+
+			<session name="Meegathon Awards" speaker="TBC">
+				<start>15:00</start>
+				<end>15:30</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="Closing" speaker="TBC">
+				<start>15:30</start>
+				<end>15:45</end>
+				<description>n/a</description>
+			</session>
+
+			<session name="BoFs and other sessions" speaker="">
+				<start>15:45</start>
+				<end>19:00</end>
+				<description>The venue is available for BoFs and workshops</description>
+			</session>
+			
+			<session name="Intel Application Lab">
+				<start>16:00</start>
+				<end>19:00</end>
+				<description></description>
+			</session>
+		</track>
+		
+		<track name="Finhack 2011" location="New Factory">
+			<session name="Finhack 2011">
+				<start>09:30</start>
+				<end>19:00</end>
+			</session>
+		</track>
+
+	</day>
+</event>

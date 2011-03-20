@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/summit_logo.png</file>
+        <file>qml/MeeGoSummitFI/DayScreen.qml</file>
+        <file>qml/MeeGoSummitFI/DaysDelegate.qml</file>
+        <file>qml/MeeGoSummitFI/main.qml</file>
+        <file>qml/MeeGoSummitFI/MainScreen.qml</file>
+        <file>qml/MeeGoSummitFI/MenuItem.qml</file>
+        <file>qml/MeeGoSummitFI/MenuText.qml</file>
+        <file>qml/MeeGoSummitFI/Screen.qml</file>
+        <file>qml/MeeGoSummitFI/SessionsDelegate.qml</file>
+        <file>qml/MeeGoSummitFI/StyledText.qml</file>
+        <file>qml/MeeGoSummitFI/TextButton.qml</file>
+        <file>qml/MeeGoSummitFI/TrackScreen.qml</file>
+        <file>qml/MeeGoSummitFI/TracksDelegate.qml</file>
+        <file>xml/program.xml</file>
+    </qresource>
+</RCC>
