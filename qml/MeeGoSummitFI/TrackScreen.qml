@@ -5,15 +5,19 @@ Screen {
 
     ListView {
         id: mainView
-        anchors.fill: parent
+        width: parent.width
+        anchors.top: parent.top
+        anchors.bottom: backbtn.top
+
+        snapMode:ListView.SnapToItem
         model: sessionsModel
         delegate: SessionsDelegate {}
     }
 
     TextButton {
-        anchors { left: parent.left; bottom: parent.bottom; margins: 20 }
+        anchors { left: parent.left; bottom: parent.bottom ; bottomMargin:10; leftMargin:10}
         text: "Back"
-
+        id: backbtn
         onClicked:  {
             trackScreen.openPrevScreen();
         }

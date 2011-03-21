@@ -5,7 +5,10 @@ Screen {
 
     Column {
         anchors.horizontalCenter: parent.horizontalCenter
+        width: parent.width
+        height: parent.height
         Image {
+            anchors.horizontalCenter: parent.horizontalCenter
             id: summitLogo
             source: "../../images/summit_logo.png"
             width: 324
@@ -15,8 +18,10 @@ Screen {
         ListView {
             boundsBehavior: Flickable.StopAtBounds
             id: mainView
-            anchors.top: summitLogo.bottom
-            anchors.fill: parent
+
+            width: parent.width
+            height: parent.height - summitLogo.height
+            //anchors.fill: parent
             model: daysModel
             delegate: DaysDelegate {}
         }

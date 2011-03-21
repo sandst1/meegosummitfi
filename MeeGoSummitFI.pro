@@ -39,7 +39,11 @@ qtcAddDeployment()
 HEADERS += \
     xmlparser.h \
     listmodel.h \
-    summititems.h
+    summititems.h \
+    OrientationFilter.h
+
+CONFIG      += mobility
+MOBILITY    += sensors
 
 OTHER_FILES +=
 

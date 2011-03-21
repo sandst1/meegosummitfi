@@ -7,8 +7,8 @@ import Qt 4.7
 
 Item {
     id: screen
-    width: 480
-    height: 600
+    width: parent.width
+    height: parent.height
     opacity: 1
 
     signal openPrevScreen()
