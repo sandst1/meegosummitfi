@@ -2,20 +2,38 @@ import Qt 4.7
 
 MenuItem {
     id: sessionsDelegate    
+    height: 75
+    Column {
+        width: parent.width
 
-    Row {
-        spacing: 15
+        Rectangle{
 
-        StyledText {
-            text: starttime + "-" + endtime
+            width: parent.width
+            height: 3
+            //color: index%2==0 ?  "#eb2a8a": "#57585b"
+            color : "#57585b"
         }
 
-        Column {
-            StyledText {
-                text: name
+        Row {
+            spacing: 15
+            Rectangle{
+                height: parent.height
+                width: 10
+                color: index%2==0 ?  "#eb2a8a": "#1476bb"
             }
+
             StyledText {
-                text: "Speaker: " + speaker
+                text: starttime + "-" + endtime
+            }
+
+            Column {
+                StyledText {
+                    text: name
+                }
+                StyledText {
+                    text: "Speaker: " + speaker
+                    color: "#54b87b"
+                }
             }
         }
     }
