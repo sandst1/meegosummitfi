@@ -9,7 +9,8 @@ MenuItem {
 
     MouseArea {
         anchors.fill: parent;
-        onClicked: {
+
+        onReleased: {
             XMLParser.setTracksModel(childlist);
             mainScreen.switchToNextScreen();
         }

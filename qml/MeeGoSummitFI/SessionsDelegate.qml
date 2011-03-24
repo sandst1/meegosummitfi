@@ -33,6 +33,7 @@ MenuItem {
                 StyledText {
                     text: "Speaker: " + speaker
                     color: "#54b87b"
+                    visible:  speaker == "" ? "false" : "true"
                 }
             }
         }
