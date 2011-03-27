@@ -2,6 +2,12 @@
 <event name="MeeGo Summit FI">
 	<day name="Friday" date="2011-04-15">
 		<track name="Plenary sessions" location="Finnkino Plevna">
+			<session name="Registration and networking coffee" speaker="">
+				<start>08:00</start>
+				<end>09:30</end>
+				<description>n/a</description>
+			</session>
+
 			<session name="Opening" speaker="Ilkka Lehtinen">
 				<start>09:15</start>
 				<end>09:30</end>
@@ -20,19 +26,19 @@
 				<description>n/a</description>
 			</session>		
 
-			<session name="Hacking your existence" speaker="Carsten Munk">
+			<session name="TBC" speaker="Sebastian Nyström">
 				<start>11:00</start>
 				<end>11:45</end>
-				<description>Hacking your existence: the importance of open-ended devices in a MeeGo world</description>
-			</session>
-
-			<session name="TBC">
-				<start>11:45</start>
-				<end>12:30</end>
 				<description>n/a</description>
 			</session>
 
-			<session name="Sposor presentations">
+			<session name="Hacking your existence: the importance of open-ended devices in a MeeGo world" speaker="Carsten Munk">
+				<start>11:45</start>
+				<end>12:30</end>
+				<description>Hacking your existence: the importance of open-ended devices in a MeeGo world</description>
+			</session>
+
+			<session name="Sponsor presentations">
 				<start>12:30</start>
 				<end>12:45</end>
 				<description>n/a</description>
@@ -59,10 +65,10 @@
 				<description>n/a</description>
 			</session>
 
-			<session name="Rapid UX concept design" speaker="Jan Krebber">
+			<session name="Rapid UX concept design: not only for mobile applications" speaker="Jan Krebber">
 				<start>15:30</start>
 				<end>16:15</end>
-				<description>Not only for mobile applications</description>
+				<description>Rapid UX concept design: not only for mobile applications</description>
 			</session>
 
 			<session name="Break">
@@ -71,7 +77,7 @@
 				<description>n/a</description>
 			</session>
 
-			<session name="QML" speaker="TBC">
+			<session name="QML" speaker="Tapani Mikkola">
 				<start>17:00</start>
 				<end>17:45</end>
 				<description>n/a</description>
@@ -91,10 +97,10 @@
 				<description>n/a</description>
 			</session>
 
-			<session name="Make money with MeeGo apps" speaker="Björn Taubert">
+			<session name="How to distribute and make money with MeeGo apps" speaker="Björn Taubert">
 				<start>15:30</start>
 				<end>16:15</end>
-				<description>How to distribute and make money with MeeGo apps - Intel AppUp</description>
+				<description>How to distribute and make money with MeeGo apps</description>
 			</session>
 
 			<session name="Break">
@@ -135,7 +141,7 @@
 				<description>n/a</description>
 			</session>
 
-			<session name="Optimizing MeeGo Apps" speaker="Uli Dumschat">
+			<session name="Optimizing MeeGo Apps with Intel MeeGo development tools" speaker="Uli Dumschat">
 				<start>17:00</start>
 				<end>17:45</end>
 				<description>Optimizing MeeGo Apps with Intel MeeGo development tools</description>
@@ -163,7 +169,7 @@
 				<description>n/a</description>
 			</session>
 
-			<session name="TBC">
+			<session name="TBC" speaker="Santtu Ahonen">
 				<start>11:00</start>
 				<end>11:45</end>
 				<description>n/a</description>
@@ -217,7 +223,7 @@
 				<description></description>
 			</session>
 		
-			<session name="Panel" speaker="Tommi Mikkonen">
+			<session name="Discussion panel" speaker="Tommi Mikkonen">
 				<start>14:00</start>
 				<end>14:45</end>
 				<description>Discussion panel moderated by Prof. Tommi Mikkonen</description>
