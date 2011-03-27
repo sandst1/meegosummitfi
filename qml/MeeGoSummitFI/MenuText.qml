@@ -4,5 +4,5 @@ StyledText {
     anchors.fill: parent;
     anchors.horizontalCenter: parent.horizontalCenter
     horizontalAlignment: Text.AlignHCenter
-    verticalAlignment: Text.AlignVCenter
+    verticalAlignment: Text.AlignVCenter    
 }

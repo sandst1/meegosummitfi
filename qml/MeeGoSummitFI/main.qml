@@ -30,36 +30,39 @@ Rectangle {
     property int curScreen: 0
     property int prevScreen: 0
 
-    function loadScreen(screenNumber) {
+    function loadScreen(goingFwd, screenNumber, screenName, screenDate) {
         prevScreen = curScreen;
         curScreen = screenNumber;
 
         console.log("main.qml::loadScreen, prev screen: " + prevScreen + ", curScreen: " + curScreen);
 
         screens[prevScreen].hide();
-        screens[curScreen].show();        
+        screens[curScreen].show();
+        if ( goingFwd ) {
+            screens[curScreen].setNameDate(screenName, screenDate)
+        }
     }
 
     property list<Item> screens: [
         MainScreen {
             parent: screenSwitcher
             onOpenNextScreen:  {
-                screenSwitcher.loadScreen(1);
+                screenSwitcher.loadScreen(true, 1, screenName, screenDate);
             }
         },
         DayScreen {
             parent: screenSwitcher
             onOpenNextScreen:  {
-                screenSwitcher.loadScreen(2);
+                screenSwitcher.loadScreen(true, 2, screenName, screenDate);
             }
             onOpenPrevScreen: {
-                screenSwitcher.loadScreen(0);
+                screenSwitcher.loadScreen(false, 0);
             }
         },
         TrackScreen {
             parent: screenSwitcher
             onOpenPrevScreen: {
-                screenSwitcher.loadScreen(1);
+                screenSwitcher.loadScreen(false, 1);
             }
         }
         //SessionScreen {}

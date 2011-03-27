@@ -2,6 +2,7 @@ import Qt 4.7
 
 Screen {
     id: trackScreen
+
     Column{
         //anchors.horizontalCenter: parent.horizontalCenter
         width: parent.width
@@ -14,10 +15,22 @@ Screen {
             height: 150
             visible: parent.width>parent.height ? "false" : "true"
         }
+
+        Text {
+            id: nameText
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.width>parent.height ? parent.top : summitLogo.bottom
+            text: trackScreen.name
+            font.family: "Helvetica"
+            font.bold: true
+            font.pointSize: 14
+            color: "#e80b8a"
+        }
+
         ListView {
             id: mainView
             width: parent.width
-            anchors.top: parent.width>parent.height ? parent.top : summitLogo.bottom
+            anchors.top: nameText.bottom
             anchors.bottom: backbtn.top
 
             snapMode:ListView.SnapToItem

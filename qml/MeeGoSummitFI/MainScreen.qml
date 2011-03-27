@@ -8,8 +8,8 @@ Screen {
         width: parent.width
         height: parent.height
         Image {
-            anchors.horizontalCenter: parent.horizontalCenter
             id: summitLogo
+            anchors.horizontalCenter: parent.horizontalCenter            
             source: "../../images/summit_logo.png"
             width: 324
             height: 150
@@ -20,8 +20,7 @@ Screen {
             id: mainView
 
             width: parent.width
-            height: parent.height - summitLogo.height
-            //anchors.fill: parent
+            height: parent.height - summitLogo.height            
             model: daysModel
             delegate: DaysDelegate {}
         }

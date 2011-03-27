@@ -1,7 +1,7 @@
 import Qt 4.7
 
 MenuItem {
-    id: daysDelegate
+    id: daysDelegate   
 
     MenuText {
         text: name;
@@ -12,7 +12,7 @@ MenuItem {
 
         onReleased: {
             XMLParser.setTracksModel(childlist);
-            mainScreen.switchToNextScreen();
+            mainScreen.switchToNextScreen(name, date);
         }
     }
 }

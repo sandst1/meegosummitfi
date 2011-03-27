@@ -10,9 +10,11 @@ Item {
     width: parent.width
     height: parent.height
     opacity: 1
+    property string name: ""
+    property string date: ""
 
     signal openPrevScreen()
-    signal openNextScreen()
+    signal openNextScreen(string screenName, string screenDate)
 
     function hide() {
         console.log("Screen.hide");
@@ -24,14 +26,20 @@ Item {
         screen.state = 'show';
     }
 
-    function switchToNextScreen () {
+    function switchToNextScreen (screenName, screenDate) {
         console.log("Screen switchToNextScreen")
-        screen.openNextScreen()
+        screen.openNextScreen(screenName, screenDate)
     }
 
     function switchToPrevScreen () {
         console.log("Screen switchToPrevScreen")
         screen.openPrevScreen()
+    }    
+
+    function setNameDate(name, date) {
+        console.log("Screen SET NAME TO " + name + ", DATE TO " + date)
+        screen.name = name
+        screen.date = date
     }
 
     states : [

@@ -28,7 +28,7 @@ MenuItem {
 
         onClicked: {
             XMLParser.setSessionsModel(childlist);
-            dayScreen.switchToNextScreen();
+            dayScreen.switchToNextScreen(childlist, dayScreen.date);
         }
     }
 }

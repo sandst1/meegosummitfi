@@ -91,8 +91,9 @@ void XMLParser::parse(QDeclarativeContext* context)
 
             // Create a list item for the track
             QString trackName = trackElem.attribute("name");
+            QString trackLocation = trackElem.attribute("location");
             TrackItem *trackItem = new TrackItem(trackName,
-                                                 trackElem.attribute("location"),
+                                                 trackLocation,
                                                  tracksModel);
 
             qDebug() << "Found track " << dayName << ": " << trackName;
@@ -100,7 +101,7 @@ void XMLParser::parse(QDeclarativeContext* context)
             // Session model
             ListModel* sessionsModel = new ListModel(new SessionItem, this);
             // Use Day+Track Name to identify a list of sessions
-            trackName = dayName + trackName;
+            trackName = dayName + ", " + trackName + " (" + trackLocation + ")";
             qDebug() << "Setting sessionsModel with the name " << trackName << ".";
             m_lists[trackName] = sessionsModel;
 
