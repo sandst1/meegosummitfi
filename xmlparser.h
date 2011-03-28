@@ -26,7 +26,7 @@ public:
     Q_INVOKABLE void setSessionsModel(const QString& modelName);
 
 signals:
-
+    void xmlParsed();
 public slots:
 
 private:

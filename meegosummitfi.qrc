@@ -14,5 +14,6 @@
         <file>qml/MeeGoSummitFI/TrackScreen.qml</file>
         <file>qml/MeeGoSummitFI/TracksDelegate.qml</file>
         <file>xml/program.xml</file>
+        <file>qml/MeeGoSummitFI/ProgressDialog.qml</file>
     </qresource>
 </RCC>

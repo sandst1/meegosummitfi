@@ -24,6 +24,23 @@ Screen {
             model: daysModel
             delegate: DaysDelegate {}
         }
+
+        ProgressDialog {
+            id: updateXMLDialog;
+            anchors { horizontalCenter: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
+        }
+
+        TextButton {
+            id: updateXMLBtn
+            anchors { bottom: parent.bottom; bottomMargin:20; horizontalCenter: parent.horizontalCenter; }
+            text: "Update program XML"
+
+            onClicked:  {
+                console.log("UpdateXMLBtn pressed")
+                updateXMLDialog.show("Updating Program XML")
+            }
+        }
+
     }
 
     Component.onCompleted: console.log("MainScreen loaded")

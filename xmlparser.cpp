@@ -128,6 +128,7 @@ void XMLParser::parse(QDeclarativeContext* context)
             }
         }
     }
+    emit this->xmlParsed();
     qDebug("XMLParser::parse exit");
 }
 
