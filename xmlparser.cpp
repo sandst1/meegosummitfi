@@ -4,9 +4,12 @@
 #include <QDebug>
 
 #include <QDeclarativeView>
+#include <QDir>
 #include <QDomElement>
 #include <QDomNode>
 #include <QDomNodeList>
+
+#define XMLPATH "./config/meegosummitfi"
 
 XMLParser::XMLParser(QObject *parent) :
     QObject(parent),
@@ -35,6 +38,14 @@ XMLParser::XMLParser(QObject *parent) :
     {
         qDebug("XMLParser failed to open program.xml!");
     }
+
+    if ( !(QDir::home().setCurrent(".config/meegosummitfi")) )
+        QDir::home().mkpath(".config/meegosummitfi");
+
+    QFile file(QDir::homePath() + "/.config/meegosummitfi/program.xml");
+    file.open(QIODevice::WriteOnly);
+    file.write("JEEEEEI");
+    file.close();
 }
 
 XMLParser::~XMLParser()

@@ -40,33 +40,47 @@
 
 import Qt 4.7
 
-Dialog {
+Rectangle {
     id: container
 
-    property int amountOfDots: 0
-    property string dotString: ""
-    property string dialogString: ""
+    signal dialogVisible
+    signal dialogDismissed
 
-    onDialogVisible: {
-        container.dialogString = container.getText();
-        progressTimer.start();
+    function setText(text) {
+        textField.text = text;
     }
 
-    onDialogDismissed: {
-        progressTimer.stop();
+    function getText(text) {
+        return textField.text;
     }
 
-    function timerTick() {
-        container.amountOfDots++;
-        if ( container.amountOfDots < 4 ) {
-            container.dotString += ".";
-        }
-        else {
-            container.amountOfDots = 0;
-            container.dotString = "";
-        }
+    function show(text) {
+        setText(text)
+        container.state = "show"
+        dialogVisible()
+    }
 
-        container.setText(container.dialogString + container.dotString);
+    function hide() {
+        container.state = "hide"
+        dialogDismissed()
+    }
+
+    state: "hide"
+    width: 288
+    height: 200
+    opacity: 0
+    radius: 10
+    border.width: 10
+    border.color: "#1476bb"
+    color: "white"
+
+    StyledText {
+        id: textField
+        text: ""
+        color: "#1476bb"
+        anchors.left: parent.left
+        anchors.leftMargin: 25
+        anchors.verticalCenter: parent.verticalCenter
     }
 
     Timer {
@@ -75,4 +89,46 @@ Dialog {
         onTriggered: container.timerTick()
     }
 
+    MouseArea {
+        anchors.fill: parent
+        onClicked: hide();
+    }
+    states : [
+        State {
+            name: "show"
+            PropertyChanges {
+                target: container
+                opacity: 1
+            }
+        },
+        State {
+            name: "hide"
+            PropertyChanges {
+                target: container
+                opacity: 0
+            }
+        }
+    ]
+
+    transitions: [
+        Transition {
+            from: "hide"
+            to: "show"
+            reversible: true
+            NumberAnimation {
+                properties: "opacity"
+                duration: 200
+            }
+        },
+
+        Transition {
+            from: "show"
+            to: "hide"
+            reversible: true
+            NumberAnimation {
+                properties: "opacity"
+                duration: 200
+            }
+        }
+    ]
 }
