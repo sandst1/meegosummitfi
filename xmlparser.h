@@ -15,20 +15,22 @@ class XMLParser : public QObject
 {
     Q_OBJECT
 public:
-    explicit XMLParser(QObject *parent = 0);
+    explicit XMLParser(QDeclarativeContext* context, QObject *parent = 0);
     ~XMLParser();
 
-    void parse(QDeclarativeContext* context);
+    void parse();
 
     ListModel* getDaysModel() { return m_daysModel; }
 
     Q_INVOKABLE void setTracksModel(const QString& modelName);
     Q_INVOKABLE void setSessionsModel(const QString& modelName);
 
-signals:
-    void xmlParsed();
-public slots:
+    Q_INVOKABLE bool updateXML(bool forceUpdate = false);
 
+signals:
+    void dataAvailable();
+public slots:
+    void programXMLDownloaded();
 private:
     QDomDocument m_doc;
     QFile        m_xmlfile;

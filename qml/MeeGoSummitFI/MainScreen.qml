@@ -1,7 +1,7 @@
 import Qt 4.7
 
 Screen {
-    id: mainScreen
+    id: mainScreen   
 
     Column {
         anchors.horizontalCenter: parent.horizontalCenter
@@ -13,16 +13,17 @@ Screen {
             source: "../../images/summit_logo.png"
             width: 324
             height: 150
-        }
+        }       
 
         ListView {
             boundsBehavior: Flickable.StopAtBounds
             id: mainView
-
             width: parent.width
             height: parent.height - summitLogo.height            
             model: daysModel
-            delegate: DaysDelegate {}
+            delegate: DaysDelegate {
+                id: daysDelegate;
+            }
         }
 
         ProgressDialog {
@@ -38,9 +39,14 @@ Screen {
             onClicked:  {
                 console.log("UpdateXMLBtn pressed")
                 updateXMLDialog.show("Updating Program XML")
+                XMLParser.updateXML(true)
             }
         }
 
+        Connections {
+            target: XMLParser
+            onDataAvailable: updateXMLDialog.hide()
+        }
     }
 
     Component.onCompleted: console.log("MainScreen loaded")

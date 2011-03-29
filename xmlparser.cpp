@@ -9,19 +9,35 @@
 #include <QDomNode>
 #include <QDomNodeList>
 
-#define XMLPATH "./config/meegosummitfi"
+#define XMLPATH ".config/meegosummitfi"
+#define XMLFILE "/.config/meegosummitfi/program.xml"
 
-XMLParser::XMLParser(QObject *parent) :
+XMLParser::XMLParser(QDeclarativeContext* context, QObject *parent) :
     QObject(parent),
     m_doc("SummitProgram"),
     m_xmlfile(),
     m_daysModel(NULL),
     m_lists(),
-    m_context(NULL)
+    m_context(context)
 {
     m_daysModel     = new ListModel(new DayItem, this);
 
-    m_xmlfile.setFileName(":/xml/program.xml");
+    // Check if we need to download the program XML
+    if ( !(updateXML(false)) )
+    {
+        qDebug("XMLParser: no need to update xml, calling parse()");
+        parse();
+    }
+}
+
+XMLParser::~XMLParser()
+{}
+
+void XMLParser::parse()
+{
+    qDebug("XMLParser::parse");   
+
+    m_xmlfile.setFileName(QDir::homePath() + XMLFILE);
 
     bool success = m_xmlfile.open(QIODevice::ReadOnly);
     if ( success )
@@ -39,30 +55,14 @@ XMLParser::XMLParser(QObject *parent) :
         qDebug("XMLParser failed to open program.xml!");
     }
 
-    if ( !(QDir::home().setCurrent(".config/meegosummitfi")) )
-        QDir::home().mkpath(".config/meegosummitfi");
-
-    QFile file(QDir::homePath() + "/.config/meegosummitfi/program.xml");
-    file.open(QIODevice::WriteOnly);
-    file.write("JEEEEEI");
-    file.close();
-}
-
-XMLParser::~XMLParser()
-{}
-
-void XMLParser::parse(QDeclarativeContext* context)
-{
-
-    qDebug("XMLParser::parse");
-
-    if ( context == NULL )
-    {
-        qDebug("Error: declarativecontext == NULL!");
-    }
-    m_context = context;
-
     QDomElement docelem = m_doc.documentElement();
+
+    // TODO: Free the memory allocated by the lists
+    m_lists.clear();
+    //m_daysModel->clear();
+    delete m_daysModel;
+    m_daysModel     = new ListModel(new DayItem, this);
+    m_context->setContextProperty("daysModel", m_daysModel);
 
     qDebug() << "DocElem:" << docelem.tagName();
 
@@ -139,7 +139,7 @@ void XMLParser::parse(QDeclarativeContext* context)
             }
         }
     }
-    emit this->xmlParsed();
+    emit this->dataAvailable();
     qDebug("XMLParser::parse exit");
 }
 
@@ -161,9 +161,38 @@ void XMLParser::setSessionsModel(const QString& modelName)
         ListModel *model = m_lists[modelName];
         m_context->setContextProperty("sessionsModel", model);
     }
-
 }
 
+bool XMLParser::updateXML(bool forceUpdate)
+{
+    // Create the XML path if it doesn't exist
+    QDir::home().mkpath(XMLPATH);
+
+    // Check if there's already an XML in the config directory
+    if ( !forceUpdate && QFile(QDir::homePath() + XMLFILE).exists() )
+    {
+        qDebug("XMLParser::updateXML, file already exists!");
+        return false;
+    }
+
+    // TODO: Change this to an actual download!
+    if ( !(QFile::copy(":/xml/program.xml", QDir::homePath() + QString(XMLFILE))) )
+    {
+        qDebug("XMLParser::updateXml, XML Download FAILED!");
+    }
+
+    // TODO: programXMLDownloaded needs to be connected
+    // to the signal coming when the xml download is ready
+    this->programXMLDownloaded();
+
+    return true;
+}
+
+void XMLParser::programXMLDownloaded()
+{
+    qDebug("XMLParser::programXMLDownloaded");
+    this->parse();
+}
 
 
 
