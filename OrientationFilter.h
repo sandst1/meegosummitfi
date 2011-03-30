@@ -1,6 +1,8 @@
 #ifndef ORIENTATIONFILTER_H
 #define ORIENTATIONFILTER_H
 
+#ifdef Q_WS_MAEMO_5
+
 #include <QOrientationFilter>
 
 QTM_USE_NAMESPACE
@@ -19,5 +21,8 @@ public:
 signals:
     void orientationChanged(const QVariant &orientation);
 };
+
+
+#endif // Q_WS_MAEMO_5
 
 #endif // ORIENTATIONFILTER_H

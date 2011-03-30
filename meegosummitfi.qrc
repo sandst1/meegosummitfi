@@ -13,7 +13,6 @@
         <file>qml/MeeGoSummitFI/TextButton.qml</file>
         <file>qml/MeeGoSummitFI/TrackScreen.qml</file>
         <file>qml/MeeGoSummitFI/TracksDelegate.qml</file>
-        <file>xml/program.xml</file>
         <file>qml/MeeGoSummitFI/ProgressDialog.qml</file>
         <file>qml/MeeGoSummitFI/Dialog.qml</file>
     </qresource>

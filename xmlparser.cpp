@@ -9,8 +9,13 @@
 #include <QDomNode>
 #include <QDomNodeList>
 
+#include <QTextStream>
+
 #define XMLPATH ".config/meegosummitfi"
 #define XMLFILE "/.config/meegosummitfi/program.xml"
+#define XMLURL "http://koti.kapsi.fi/~sh8dfwk/meegosummitfi/program.xml"
+
+#define HTTP_OK 200
 
 XMLParser::XMLParser(QDeclarativeContext* context, QObject *parent) :
     QObject(parent),
@@ -18,9 +23,14 @@ XMLParser::XMLParser(QDeclarativeContext* context, QObject *parent) :
     m_xmlfile(),
     m_daysModel(NULL),
     m_lists(),
-    m_context(context)
+    m_context(context),
+    m_networkManager(NULL)
 {
     m_daysModel     = new ListModel(new DayItem, this);
+    m_networkManager = new QNetworkAccessManager(this);
+
+    connect(m_networkManager, SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(programXMLDownloaded(QNetworkReply*)));
 
     // Check if we need to download the program XML
     if ( !(updateXML(false)) )
@@ -176,21 +186,50 @@ bool XMLParser::updateXML(bool forceUpdate)
     }
 
     // TODO: Change this to an actual download!
-    if ( !(QFile::copy(":/xml/program.xml", QDir::homePath() + QString(XMLFILE))) )
-    {
-        qDebug("XMLParser::updateXml, XML Download FAILED!");
-    }
+    //if ( !(QFile::copy(":/xml/program.xml", QDir::homePath() + QString(XMLFILE))) )
+    //{
+    //    qDebug("XMLParser::updateXml, XML Download FAILED!");
+    //}
+    QUrl url(XMLURL);
+    m_networkManager->get(QNetworkRequest(url));
 
     // TODO: programXMLDownloaded needs to be connected
     // to the signal coming when the xml download is ready
-    this->programXMLDownloaded();
+    //this->programXMLDownloaded();
 
     return true;
 }
 
-void XMLParser::programXMLDownloaded()
+void XMLParser::programXMLDownloaded(QNetworkReply* networkReply)
 {
     qDebug("XMLParser::programXMLDownloaded");
+
+    if ( networkReply->error() == QNetworkReply::NoError )
+    {
+        int status = networkReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toUInt();
+
+        qDebug("HTTP Status code %d", status);
+
+        if ( status == HTTP_OK )
+        {
+            QFile programFile(QDir::homePath() + QString(XMLFILE));
+            programFile.open(QIODevice::WriteOnly);
+
+            QString programXML = QString::fromUtf8(networkReply->readAll().data());
+
+            QTextStream out(&programFile);
+            out << programXML;
+
+            programFile.close();
+        }
+        else
+        {
+            qDebug("Download failed!");
+        }
+
+
+    }
+
     this->parse();
 }
 

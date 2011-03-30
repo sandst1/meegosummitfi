@@ -5,6 +5,8 @@
 #include <qdom.h>
 #include <QFile>
 #include <QMap>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 #include <QString>
 #include <QVector>
 #include <QDeclarativeContext>
@@ -30,7 +32,7 @@ public:
 signals:
     void dataAvailable();
 public slots:
-    void programXMLDownloaded();
+    void programXMLDownloaded(QNetworkReply*);
 private:
     QDomDocument m_doc;
     QFile        m_xmlfile;
@@ -40,6 +42,8 @@ private:
     //ListModel*   m_sessionsModel;
     QMap<QString, ListModel*> m_lists;
     QDeclarativeContext* m_context;
+
+    QNetworkAccessManager* m_networkManager;
 };
 
 #endif // XMLPARSER_H
