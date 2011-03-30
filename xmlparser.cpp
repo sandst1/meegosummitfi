@@ -228,6 +228,7 @@ void XMLParser::programXMLDownloaded(QNetworkReply* networkReply)
         else
         {
             qDebug("Download failed!");
+            emit this->dataUpdateFailed();
         }
 
 

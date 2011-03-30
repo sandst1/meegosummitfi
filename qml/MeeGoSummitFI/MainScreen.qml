@@ -42,11 +42,6 @@ Screen {
                 XMLParser.updateXML(true)
             }
         }
-
-        Connections {
-            target: XMLParser
-            onDataAvailable: updateXMLDialog.hide()
-        }
     }
 
     Component.onCompleted: console.log("MainScreen loaded")

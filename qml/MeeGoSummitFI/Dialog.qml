@@ -78,9 +78,10 @@ Rectangle {
         id: textField
         text: ""
         color: "#1476bb"
-        anchors.left: parent.left
-        anchors.leftMargin: 25
-        anchors.verticalCenter: parent.verticalCenter
+        //anchors.left: parent.left
+        //anchors.leftMargin: 25
+        //anchors.verticalCenter: parent.verticalCenter
+        anchors.centerIn: parent
     }
 
     Timer {

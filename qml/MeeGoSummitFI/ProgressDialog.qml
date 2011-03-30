@@ -43,36 +43,21 @@ import Qt 4.7
 Dialog {
     id: container
 
-    property int amountOfDots: 0
-    property string dotString: ""
-    property string dialogString: ""
-
-    onDialogVisible: {
-        container.dialogString = container.getText();
-        progressTimer.start();
-    }
-
-    onDialogDismissed: {
-        progressTimer.stop();
-    }
-
-    function timerTick() {
-        container.amountOfDots++;
-        if ( container.amountOfDots < 4 ) {
-            container.dotString += ".";
-        }
-        else {
-            container.amountOfDots = 0;
-            container.dotString = "";
-        }
-
-        container.setText(container.dialogString + container.dotString);
+    function showResult(message) {
+        container.setText(message)
+        resultTimer.start()
     }
 
     Timer {
-        id: progressTimer
-        interval: 1000; running: false; repeat: true
-        onTriggered: container.timerTick()
+        id: resultTimer
+        interval: 1500; running: false; repeat: false
+        onTriggered: container.hide()
+    }
+
+    Connections {
+        target: XMLParser
+        onDataAvailable: container.showResult("Program updated")
+        onDataUpdateFailed: container.showResult("Update failed")
     }
 
 }

@@ -27,10 +27,11 @@ public:
     Q_INVOKABLE void setTracksModel(const QString& modelName);
     Q_INVOKABLE void setSessionsModel(const QString& modelName);
 
-    Q_INVOKABLE bool updateXML(bool forceUpdate = false);
+    Q_INVOKABLE bool updateXML(bool forceUpdate);
 
 signals:
     void dataAvailable();
+    void dataUpdateFailed();
 public slots:
     void programXMLDownloaded(QNetworkReply*);
 private:
