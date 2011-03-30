@@ -212,13 +212,16 @@ void XMLParser::programXMLDownloaded(QNetworkReply* networkReply)
 
         if ( status == HTTP_OK )
         {
-            QFile programFile(QDir::homePath() + QString(XMLFILE));
+            QString programFileStr(QDir::homePath() + QString(XMLFILE));
+            QFile::remove(programFileStr);
+
+            QFile programFile(programFileStr);
             programFile.open(QIODevice::WriteOnly);
 
-            QString programXML = QString::fromUtf8(networkReply->readAll().data());
+            QString programBuffer = QString::fromUtf8(networkReply->readAll().data());
 
             QTextStream out(&programFile);
-            out << programXML;
+            out << programBuffer;
 
             programFile.close();
         }
