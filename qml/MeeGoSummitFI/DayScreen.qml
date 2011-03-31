@@ -3,43 +3,24 @@ import Qt 4.7
 Screen {
     id: dayScreen
 
-    Column{
+    Column {
         anchors.horizontalCenter: parent.horizontalCenter
         width: parent.width
-        height: parent.height       
-
-        Image {
-            id: summitLogo
-            anchors.horizontalCenter: parent.horizontalCenter            
-            source: "../../images/summit_logo.png"
-            width: 324
-            height: 150
-            visible: parent.width>parent.height ? "false" : "true"
-        }
-
-        Text {
-            id: nameText
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.width>parent.height ? parent.top : summitLogo.bottom
-            text: dayScreen.name
-            font.family: "Helvetica"
-            font.bold: true
-            font.pointSize: 14
-            color: "#e80b8a"
-        }
+        height: parent.height
 
         ListView {
             id: dayView
             anchors.horizontalCenter: parent.horizontalCenter
 
-            anchors.top: nameText.bottom
-            anchors.bottom: backbtn.top
+            height: parent.height
             width: parent.width
-
-            snapMode:ListView.SnapToItem
-
             model: tracksModel
             delegate: TracksDelegate {}
+
+            header: ScreenHeader {
+                width: dayScreen.width
+                headerText: dayScreen.name
+            }
         }
 
         TextButton {

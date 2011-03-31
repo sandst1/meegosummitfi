@@ -2,7 +2,7 @@ import Qt 4.7
 
 MenuItem {
     id: sessionsDelegate    
-    height: 75
+    height: Math.ceil(sessionName.text.length/30)*30 + Math.ceil(sessionSpeaker.text.length/20)*30
 
     function isCurrent(startTime, endTime) {
         var curDate = Qt.formatDateTime(new Date(), "yyyy-MM-dd")
@@ -45,18 +45,16 @@ MenuItem {
 
             Column {
                 StyledText {
+                    id: sessionName
                     text: name
                 }
                 StyledText {
-                    text: "Speaker: " + speaker
+                    id: sessionSpeaker
+                    text: speaker
                     color: "#54b87b"
                     visible:  speaker == "" ? "false" : "true"
                 }
             }
         }
     }
-
-    /*MouseArea {
-        anchors.fill: parent;
-    }*/
 }
