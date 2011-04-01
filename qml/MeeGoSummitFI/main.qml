@@ -7,28 +7,43 @@ import Qt 4.7
 
 Rectangle {
     function orientationChanged(orientation) {
-
+/*
         console.log("main.qml::orientationChanged " + orientation);
         console.log("main.qml::orientationChanged " + screenSwitcher.width+":"+screenSwitcher.height);
         if (orientation == 1){
-            //screenSwitcher.state = 'landscape'
-            //screenSwitcher.rotation = 0
+            screenSwitcher.width = 800
+            screenSwitcher.height = 480
+            screens[curScreen].width = screenSwitcher.width
+            screens[curScreen].height = screenSwitcher.height
+            screens[curScreen].y = 0;
         }
-        else{
-            //screenSwitcher.state = ''
-            //screenSwitcher.rotation =0
+        else if (orientation == 3 ){
+            var tmp = screenSwitcher.width;
+            screenSwitcher.width = 480
+            screenSwitcher.height = 800
+            screens[curScreen].width = screenSwitcher.width
+            screens[curScreen].height = screenSwitcher.height - 150
+            screens[curScreen].y = 150;
         }
+        */
     }
 
     id: screenSwitcher
     width: 480
     height: 800
     color: "#3A3A3C"
-    //Behavior on rotation { RotationAnimation { direction: RotationAnimation.Shortest; duration: 500; easing.type: Easing.OutBounce } }
-    Behavior on width    { NumberAnimation   { duration: 500 } }
-    Behavior on height   { NumberAnimation   { duration: 500 } }
+
     property int curScreen: 0
     property int prevScreen: 0
+
+    Image {
+        id: summitLogo
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        source: "../../images/summit_logo.png"
+        width: 324
+        height: 150
+    }
 
     function loadScreen(goingFwd, screenNumber, screenName, screenDate) {
         prevScreen = curScreen;
@@ -78,9 +93,4 @@ Rectangle {
 
         screens[0].show();
     }
-    states: State {
-            name: "landscape"
-            PropertyChanges { target: screenSwitcher; width: screenSwitcher.height; height: screenSwitcher.width }
-        }
-
 }

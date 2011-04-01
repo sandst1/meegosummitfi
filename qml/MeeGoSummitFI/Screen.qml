@@ -8,7 +8,9 @@ import Qt 4.7
 Item {
     id: screen
     width: parent.width
-    height: parent.height
+    height: parent.height - 150
+    x: 0
+    y: 150
     opacity: 1
     property string name: ""
     property string date: ""
@@ -55,7 +57,7 @@ Item {
             name: "hide"
             PropertyChanges {
                 target: screen
-                x: -100
+                x: -300
                 opacity: 0
             }
         }
@@ -65,6 +67,15 @@ Item {
         Transition {
             from: "hide"
             to: "show"
+            reversible: true
+            NumberAnimation {
+                properties: "x"
+                duration: 200
+            }
+        },
+        Transition {
+            from: "show"
+            to: "hide"
             reversible: true
             NumberAnimation {
                 properties: "x"

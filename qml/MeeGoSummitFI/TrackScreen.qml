@@ -13,13 +13,19 @@ Screen {
             anchors.horizontalCenter: parent.horizontalCenter
             height: parent.height
             width: parent.width
+            clip: true
 
             model: sessionsModel
             delegate: SessionsDelegate {}
 
-            header: ScreenHeader {
-                width: trackScreen.width
-                headerText: trackScreen.name
+            header: Text {
+                id: nameText
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: trackScreen.name
+                font.family: "Helvetica"
+                font.bold: true
+                font.pointSize: 14
+                color: "#e80b8a"
             }
         }
 

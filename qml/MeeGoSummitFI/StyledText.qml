@@ -5,3 +5,4 @@ Text {
     font.family: "Helvetica"
     font.pointSize: 16
 }
+

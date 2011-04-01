@@ -1,6 +1,8 @@
 #ifndef ORIENTATIONFILTER_H
 #define ORIENTATIONFILTER_H
 
+#include <QDeclarativeContext>
+
 #ifdef Q_WS_MAEMO_5
 
 #include <QOrientationFilter>

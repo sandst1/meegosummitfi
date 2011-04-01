@@ -2,7 +2,7 @@ import Qt 4.7
 
 MenuItem {
     id: sessionsDelegate    
-    height: Math.ceil(sessionName.text.length/30)*30 + Math.ceil(sessionSpeaker.text.length/20)*30
+    height: sessionBar.height
 
     function isCurrent(startTime, endTime) {
         var curDate = Qt.formatDateTime(new Date(), "yyyy-MM-dd")
@@ -31,26 +31,34 @@ MenuItem {
         }
 
         Row {
+            height: sessionName.height + sessionSpeaker.height
+            width: parent.width
             spacing: 15
             Rectangle{
+                id: sessionBar
                 height: parent.height
                 width: 10
                 color: index%2==0 ?  "#eb2a8a": "#1476bb"
             }
 
             StyledText {
+                id: sessionTime
                 text: starttime + "-" + endtime
                 color: isCurrent(starttime, endtime) == true ? "yellow" : "#1476bb"
             }
 
             Column {
+                height: children.height
+                width: parent.width
                 StyledText {
                     id: sessionName
                     text: name
+                    wrapMode: Text.WordWrap
+                    width: parent.width - (sessionBar.width + sessionTime.width + 30)
                 }
                 StyledText {
                     id: sessionSpeaker
-                    text: speaker
+                    text: speaker                    
                     color: "#54b87b"
                     visible:  speaker == "" ? "false" : "true"
                 }

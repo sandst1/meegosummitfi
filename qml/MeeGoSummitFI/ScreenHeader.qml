@@ -12,7 +12,6 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         Image {
             id: summitLogo
-            //anchors.horizontalCenter: parent.horizontalCenter
             source: "../../images/summit_logo.png"
             width: 324
             height: 150
@@ -22,7 +21,6 @@ Item {
         Text {
             id: nameText
             anchors.horizontalCenter: parent.horizontalCenter
-            //anchors.top: parent.width>parent.height ? parent.top : summitLogo.bottom
             text: screenHeader.headerText
             font.family: "Helvetica"
             font.bold: true

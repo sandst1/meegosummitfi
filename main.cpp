@@ -36,7 +36,6 @@ int main(int argc, char *argv[])
 
     viewer.setResizeMode(QDeclarativeView::SizeRootObjectToView);
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
-    //viewer.setMainQmlFile(QLatin1String("qml/MeeGoSummitFI/main.qml"));
     viewer.setSource(QUrl("qrc:/qml/MeeGoSummitFI/main.qml"));
 
 #ifdef Q_WS_MAEMO_5

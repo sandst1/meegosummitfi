@@ -1,5 +1,6 @@
 import Qt 4.7
 
+
 Screen {
     id: dayScreen
 
@@ -11,16 +12,23 @@ Screen {
         ListView {
             id: dayView
             anchors.horizontalCenter: parent.horizontalCenter
+            clip: true
 
             height: parent.height
             width: parent.width
             model: tracksModel
-            delegate: TracksDelegate {}
+            delegate: TracksDelegate { id: tracksDelegate }
 
-            header: ScreenHeader {
-                width: dayScreen.width
-                headerText: dayScreen.name
-            }
+            header:
+                Text {
+                    id: nameText
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: dayScreen.name
+                    font.family: "Helvetica"
+                    font.bold: true
+                    font.pointSize: 14
+                    color: "#e80b8a"
+                }
         }
 
         TextButton {

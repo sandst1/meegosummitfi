@@ -8,6 +8,8 @@ MenuItem {
     }
 
     MenuText {
+        width: parent.width*0.75
+        height: 100
         id: dayName
         text: name;
         color: "#1476bb"
@@ -16,9 +18,9 @@ MenuItem {
     MouseArea {
         anchors.fill: parent;
 
-        onReleased: {
+        onPressed: {
             XMLParser.setTracksModel(childlist);
             mainScreen.switchToNextScreen(name, date);
-        }                
+        }
     }
 }

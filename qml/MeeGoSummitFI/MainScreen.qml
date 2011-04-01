@@ -7,17 +7,11 @@ Screen {
         anchors.horizontalCenter: parent.horizontalCenter
         width: parent.width
         height: parent.height
-        Image {
-            id: summitLogo
-            anchors.horizontalCenter: parent.horizontalCenter            
-            source: "../../images/summit_logo.png"
-            width: 324
-            height: 150
-        }       
 
         ListView {
-            boundsBehavior: Flickable.StopAtBounds
             id: mainView
+            boundsBehavior: Flickable.StopAtBounds
+
             width: parent.width
             height: parent.height - summitLogo.height            
             model: daysModel
