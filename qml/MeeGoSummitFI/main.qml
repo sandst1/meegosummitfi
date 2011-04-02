@@ -6,28 +6,6 @@ import Qt 4.7
 // http://kunalmaemo.blogspot.com/2010/12/simple-view-switching-animation-with-qt.html
 
 Rectangle {
-    function orientationChanged(orientation) {
-/*
-        console.log("main.qml::orientationChanged " + orientation);
-        console.log("main.qml::orientationChanged " + screenSwitcher.width+":"+screenSwitcher.height);
-        if (orientation == 1){
-            screenSwitcher.width = 800
-            screenSwitcher.height = 480
-            screens[curScreen].width = screenSwitcher.width
-            screens[curScreen].height = screenSwitcher.height
-            screens[curScreen].y = 0;
-        }
-        else if (orientation == 3 ){
-            var tmp = screenSwitcher.width;
-            screenSwitcher.width = 480
-            screenSwitcher.height = 800
-            screens[curScreen].width = screenSwitcher.width
-            screens[curScreen].height = screenSwitcher.height - 150
-            screens[curScreen].y = 150;
-        }
-        */
-    }
-
     id: screenSwitcher
     //width: 480
     //height: 800
@@ -49,8 +27,6 @@ Rectangle {
         source: "../../images/summit_logo.png"
         width: 324
         height: 150
-        //anchors.horizontalCenter: isPortait() ? screens[curScreen].horizontalCenter : parent.left
-        //anchors.horizontalCenterOffset: isPortrait() ? 240 : 0
         anchors.left: parent.left
         anchors.leftMargin: isPortrait() ? 78 : 0
         anchors.top: parent.top
