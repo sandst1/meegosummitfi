@@ -27,7 +27,7 @@ Component {
             id: moveMe; height: parent.height
             Rectangle {
                 id: blackRect
-                color: "black"; opacity: wrapper.ListView.index % 2 ? 0.2 : 0.3; height: wrapper.height-2; width: wrapper.width; y: 1
+                color: "#181818"; opacity: wrapper.ListView.index % 2 ? 0.2 : 0.3; height: wrapper.height-2; width: wrapper.width; y: 1
             }
             Item {
                 id: image; x: 6; width: 48; height: 48; smooth: true
