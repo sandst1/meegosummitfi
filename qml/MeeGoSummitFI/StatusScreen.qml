@@ -4,7 +4,7 @@ Screen {
     id: statusScreen
 
     function setActiveEvent(){
-        active.text="Active Event"
+        active.text="#meegofi"
     }
 
     Timer {
@@ -24,7 +24,7 @@ Screen {
         StyledText{
             id: active
             anchors.horizontalCenter: parent.horizontalCenter
-            text: "active event"
+            text: "#meegofi"
         }
         TwitterModel{
             id:meegofi
