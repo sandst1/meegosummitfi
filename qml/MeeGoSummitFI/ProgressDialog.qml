@@ -45,19 +45,22 @@ Dialog {
 
     function showResult(message) {
         container.setText(message)
-        resultTimer.start()
+        resultTimer.start()        
     }
 
     Timer {
         id: resultTimer
         interval: 1500; running: false; repeat: false
-        onTriggered: container.hide()
+        onTriggered: {
+            container.hide()
+            updateXMLBtn.visible = true
+        }
     }
 
     Connections {
         target: XMLParser
         onDataAvailable: container.showResult("Program updated")
-        onDataUpdateFailed: container.showResult("Update failed")
+        onDataUpdateFailed: container.showResult("Program download failed")
     }
 
 }

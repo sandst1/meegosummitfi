@@ -44,11 +44,11 @@ Rectangle {
     id: container
 
     property alias text: label.text
-
     signal clicked
 
     color: "#AFAFAF"
-    width: label.width + 60; height: label.height + 20
+    width: label.width + 70
+    height: label.height + 15
     radius: 10
 
     MouseArea {
@@ -57,8 +57,9 @@ Rectangle {
         onClicked: { container.clicked() }
     }
 
-    Text {
+    StyledText {
         id: label
+        color: "black"
         anchors.centerIn: parent
     }
 

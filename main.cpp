@@ -38,6 +38,7 @@ int main(int argc, char *argv[])
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
     viewer.setSource(QUrl("qrc:/qml/MeeGoSummitFI/main.qml"));
 
+/*
 #ifdef Q_WS_MAEMO_5
 
     QOrientationSensor sensor;
@@ -49,6 +50,7 @@ int main(int argc, char *argv[])
 
     sensor.start();
 #endif
+*/
 
     viewer.showExpanded();
 

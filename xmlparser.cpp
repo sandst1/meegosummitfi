@@ -185,17 +185,20 @@ bool XMLParser::updateXML(bool forceUpdate)
         return false;
     }
 
-    // TODO: Change this to an actual download!
-    //if ( !(QFile::copy(":/xml/program.xml", QDir::homePath() + QString(XMLFILE))) )
-    //{
-    //    qDebug("XMLParser::updateXml, XML Download FAILED!");
-    //}
+    if ( !forceUpdate )
+    {
+        emit this->startingDataUpdate();
+    }
+
+    // Check if there's network available
+    if ( m_networkManager->networkAccessible() == QNetworkAccessManager::NotAccessible )
+    {
+        emit this->dataUpdateFailed();
+        return false;
+    }
+
     QUrl url(XMLURL);
     m_networkManager->get(QNetworkRequest(url));
-
-    // TODO: programXMLDownloaded needs to be connected
-    // to the signal coming when the xml download is ready
-    //this->programXMLDownloaded();
 
     return true;
 }

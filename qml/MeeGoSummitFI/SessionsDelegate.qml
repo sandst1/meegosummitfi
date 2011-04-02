@@ -31,7 +31,7 @@ MenuItem {
         }
 
         Row {
-            height: sessionName.height + sessionSpeaker.height
+            height: sessionName.height + sessionSpeaker.height + 30
             width: parent.width
             spacing: 15
             Rectangle{

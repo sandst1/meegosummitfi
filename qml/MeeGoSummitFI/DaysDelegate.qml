@@ -13,6 +13,7 @@ MenuItem {
         id: dayName
         text: name;
         color: "#1476bb"
+        anchors.verticalCenter: parent.verticalCenter
     }
 
     MouseArea {

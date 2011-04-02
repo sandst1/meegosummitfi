@@ -28,14 +28,5 @@ Screen {
                 color: "#e80b8a"
             }
         }
-
-        TextButton {
-            anchors { left: parent.left; bottom: parent.bottom ; bottomMargin:10; leftMargin:10}
-            text: "Back"
-            id: backbtn
-            onClicked:  {
-                trackScreen.openPrevScreen();
-            }
-        }
     }
 }

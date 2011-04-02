@@ -4,6 +4,8 @@ Screen {
     id: mainScreen   
 
     Column {
+        anchors.top: parent.top
+        anchors.topMargin: 80
         anchors.horizontalCenter: parent.horizontalCenter
         width: parent.width
         height: parent.height
@@ -19,24 +21,6 @@ Screen {
                 id: daysDelegate;
             }
         }
-
-        ProgressDialog {
-            id: updateXMLDialog;
-            anchors { horizontalCenter: parent.horizontalCenter; verticalCenter: parent.verticalCenter; }
-        }
-
-        TextButton {
-            id: updateXMLBtn
-            anchors { bottom: parent.bottom; bottomMargin:20; horizontalCenter: parent.horizontalCenter; }
-            text: "Update program XML"
-
-            onClicked:  {
-                console.log("UpdateXMLBtn pressed")
-                updateXMLDialog.show("Updating Program XML")
-                XMLParser.updateXML(true)
-            }
-        }
     }
-
     Component.onCompleted: console.log("MainScreen loaded")
 }

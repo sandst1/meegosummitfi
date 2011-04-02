@@ -32,6 +32,7 @@ public:
 signals:
     void dataAvailable();
     void dataUpdateFailed();
+    void startingDataUpdate();
 public slots:
     void programXMLDownloaded(QNetworkReply*);
 private:

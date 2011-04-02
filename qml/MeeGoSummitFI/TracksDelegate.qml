@@ -5,6 +5,7 @@ MenuItem {
 
     Column {
         width: tracksDelegate.ListView.view.width
+        height: 130
         Rectangle{
             id: dividerBar
             anchors.horizontalCenter:parent.horizontalCenter
@@ -14,11 +15,9 @@ MenuItem {
             //visible: index == 0 ? "false" : "true"
         }
         MenuText {
-
             text: name + " " + "(" + location + ")"
-
             color: index % 2 == 0 ? "#1476bb" : "#ffffff"
-
+            anchors.verticalCenter: parent.verticalCenter
         }
 
     }

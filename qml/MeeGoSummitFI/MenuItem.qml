@@ -4,5 +4,5 @@ Rectangle {
     anchors.horizontalCenter: parent.horizontalCenter
     height: 120
     width: parent.width
-    color: "#3A3A3C"    
+    color: "#181818" //"#3A3A3C"
     }

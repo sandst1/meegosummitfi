@@ -6,11 +6,18 @@ import Qt 4.7
 // http://kunalmaemo.blogspot.com/2010/12/simple-view-switching-animation-with-qt.html
 
 Item {
+    function isPortrait() {
+        if ( parent.width < 500 ) {
+            return true;
+        }
+        return false;
+    }
+
     id: screen
-    width: parent.width
-    height: parent.height - 150
-    x: 0
-    y: 150
+    width: isPortrait() ? parent.width : parent.width * 0.55
+    height: isPortrait() ? parent.height - 210 : parent.height
+    x: isPortrait() ? -300 : 340
+    y: isPortrait() ? 150 : -300
     opacity: 1
     property string name: ""
     property string date: ""
@@ -49,7 +56,8 @@ Item {
             name: "show"
             PropertyChanges {
                 target: screen
-                x: 0
+                x: isPortrait() ? 0 : 340
+                y: isPortrait() ? 150 : 0
                 opacity: 1
             }
         },
@@ -57,7 +65,8 @@ Item {
             name: "hide"
             PropertyChanges {
                 target: screen
-                x: -300
+                x: isPortrait() ? -300 : x
+                y: isPortrait() ? y : -300
                 opacity: 0
             }
         }
@@ -69,7 +78,7 @@ Item {
             to: "show"
             reversible: true
             NumberAnimation {
-                properties: "x"
+                properties: isPortrait() ? "x" : "y"
                 duration: 200
             }
         },
@@ -78,7 +87,7 @@ Item {
             to: "hide"
             reversible: true
             NumberAnimation {
-                properties: "x"
+                properties: isPortrait() ? "x" : "y"
                 duration: 200
             }
         }
