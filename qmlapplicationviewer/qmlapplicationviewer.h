@@ -30,7 +30,7 @@ public:
     void setMainQmlFile(const QString &file);
     void addImportPath(const QString &path);
     void setOrientation(ScreenOrientation orientation);
-    void showExpanded();  
+    void showExpanded();
 
 private:
     class QmlApplicationViewerPrivate *m_d;

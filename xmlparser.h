@@ -29,6 +29,8 @@ public:
 
     Q_INVOKABLE bool updateXML(bool forceUpdate);
 
+    Q_INVOKABLE void updateCurrentSessions();
+
 signals:
     void dataAvailable();
     void dataUpdateFailed();
@@ -40,12 +42,11 @@ private:
     QFile        m_xmlfile;
 
     ListModel*   m_daysModel;
-    //ListModel*   m_tracksModel;
-    //ListModel*   m_sessionsModel;
     QMap<QString, ListModel*> m_lists;
     QDeclarativeContext* m_context;
 
     QNetworkAccessManager* m_networkManager;
+    ListModel*   m_currentSessions;
 };
 
 #endif // XMLPARSER_H

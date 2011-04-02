@@ -102,8 +102,6 @@ void QmlApplicationViewer::addImportPath(const QString &path)
 
 void QmlApplicationViewer::setOrientation(ScreenOrientation orientation)
 {
-    qDebug("QmlApplicationViewer::setOrientation");
-
 #if defined(Q_OS_SYMBIAN)
     // If the version of Qt on the device is < 4.7.2, that attribute won't work
     if (orientation != ScreenOrientationAuto) {

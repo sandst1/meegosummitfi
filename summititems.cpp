@@ -80,13 +80,15 @@ SessionItem::SessionItem(const QString &name,
                          const QString &starttime,
                          const QString &endtime,
                          const QString &description,
+                         const QString &track,
                          QObject *parent)
     : ListItem(parent),
       m_name(name),
       m_speaker(speaker),
       m_starttime(starttime),
       m_endtime(endtime),
-      m_description(description)
+      m_description(description),
+      m_track(track)
 {}
 
 QHash<int, QByteArray> SessionItem::roleNames() const
@@ -97,6 +99,7 @@ QHash<int, QByteArray> SessionItem::roleNames() const
     names[StartTimeRole]    = "starttime";
     names[EndTimeRole]      = "endtime";
     names[DescriptionRole]  = "description";
+    names[TrackRole]        = "track";
     return names;
 }
 
@@ -118,6 +121,9 @@ QVariant SessionItem::data(int role) const
 
         case DescriptionRole:
             return description();
+
+        case TrackRole:
+            return track();
 
         default:
             return QVariant();

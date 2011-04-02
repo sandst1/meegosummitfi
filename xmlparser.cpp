@@ -9,6 +9,8 @@
 #include <QDomNode>
 #include <QDomNodeList>
 
+#include <QDateTime>
+
 #include <QTextStream>
 
 #define XMLPATH ".config/meegosummitfi"
@@ -24,7 +26,8 @@ XMLParser::XMLParser(QDeclarativeContext* context, QObject *parent) :
     m_daysModel(NULL),
     m_lists(),
     m_context(context),
-    m_networkManager(NULL)
+    m_networkManager(NULL),
+    m_currentSessions(NULL)
 {
     m_daysModel     = new ListModel(new DayItem, this);
     m_networkManager = new QNetworkAccessManager(this);
@@ -143,6 +146,7 @@ void XMLParser::parse()
                                                            sessionNode.namedItem("start").childNodes().at(0).nodeValue(),
                                                            sessionNode.namedItem("end").childNodes().at(0).nodeValue(),
                                                            sessionNode.namedItem("description").childNodes().at(0).nodeValue(),
+                                                           "",
                                                            sessionsModel);
                 // Add the Session to the list model
                 sessionsModel->appendRow(sessionItem);
@@ -238,6 +242,136 @@ void XMLParser::programXMLDownloaded(QNetworkReply* networkReply)
     }
 
     this->parse();
+}
+
+Q_INVOKABLE void XMLParser::updateCurrentSessions()
+{
+    qDebug("XMLParser::updateCurrentSessions");
+    if ( m_currentSessions )
+    {
+        delete m_currentSessions;
+        m_currentSessions = NULL;
+    }
+
+
+    QDomElement docelem = m_doc.documentElement();
+
+    // TODO: Free the memory allocated by the lists
+    //m_lists.clear();
+    //m_daysModel->clear();
+   //delete m_daysModel;
+    //m_daysModel     = new ListModel(new DayItem, this);
+    //m_context->setContextProperty("daysModel", m_daysModel);
+
+    qDebug() << "DocElem:" << docelem.tagName();
+
+    // Parse days
+    QDomNodeList days = docelem.elementsByTagName("day");
+    for ( int i = 0; i < days.size(); i++ )
+    {
+        QDomNode day = days.at(i);
+        QDomElement dayElem = days.at(i).toElement();
+
+
+// TODO: ENABLE THIS WHEN PARSING IS DONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //QString dayName = dayElem.attribute("name");
+        QString xmlDate = dayElem.attribute("date");
+        QString curDate = QDateTime::currentDateTime().toString("yyyy-MM-dd");
+
+        if ( xmlDate != curDate )
+        {
+            qDebug("Nothing sessions ongoing");
+            //continue;
+        }
+// TODO: ENABLE THIS WHEN PARSING IS DONE^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+        // Create a model for the Tracks happening at this day
+        //ListModel* tracksModel = new ListModel(new TrackItem, this);
+        //m_lists[dayName] = tracksModel;
+
+        //DayItem *dayItem = new DayItem(dayName,
+        //                               dayElem.attribute("date"),
+        //                               m_daysModel);
+
+        qDebug() << "XMLParser: Loaded day" << curDate;
+
+        // Put the name to the day item's data so
+        // we know where to go next when the day is selected
+        //dayItem->setChildList(dayName);
+
+        // Add the day to the list model
+        //m_daysModel->appendRow(dayItem);
+
+        // Get the data for the Tracks
+        QDomNodeList tracks = day.childNodes();
+        for ( int j = 0; j < tracks.size(); j++ )
+        {
+            QDomNode track = tracks.at(j);
+
+            QDomElement trackElem = track.toElement();
+
+            // Create a list item for the track
+            QString trackName = trackElem.attribute("name");
+            QString trackLocation = trackElem.attribute("location");
+            //TrackItem *trackItem = new TrackItem(trackName,
+            //                                     trackLocation,
+            //                                     tracksModel);
+
+            //qDebug() << "Found track " << dayName << ": " << trackName;
+
+            // Session model
+            m_currentSessions = new ListModel(new SessionItem, this);
+
+
+
+            // Use Day+Track Name to identify a list of sessions
+            trackName = dayName + ", " + trackName + " (" + trackLocation + ")";
+            //qDebug() << "Setting sessionsModel with the name " << trackName << ".";
+            //m_lists[trackName] = sessionsModel;
+
+            //trackItem->setChildList(trackName);
+
+            // Add the Track to the list model
+            //tracksModel->appendRow(trackItem);
+
+            // Get the Sessions for this Track
+            QDomNodeList sessions = track.childNodes();
+            for ( int k = 0; k < sessions.size(); k++ )
+            {
+                QDomNode sessionNode = sessions.at(k);
+                QDomElement sessionElem = sessionNode.toElement();
+
+                SessionItem *sessionItem = new SessionItem(sessionElem.attribute("name"),
+                                                           sessionElem.attribute("speaker"),
+                                                           sessionNode.namedItem("start").childNodes().at(0).nodeValue(),
+                                                           sessionNode.namedItem("end").childNodes().at(0).nodeValue(),
+                                                           sessionNode.namedItem("description").childNodes().at(0).nodeValue(),
+                                                           "",
+                                                           sessionsModel);
+                // Add the Session to the list model
+                sessionsModel->appendRow(sessionItem);
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    qDebug("XMLParser::updateCurrentSessions");
+
 }
 
 

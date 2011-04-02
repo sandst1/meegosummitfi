@@ -79,7 +79,8 @@ public:
         SpeakerRole,
         StartTimeRole,
         EndTimeRole,
-        DescriptionRole
+        DescriptionRole,
+        TrackRole
     };
 
 public:
@@ -89,6 +90,7 @@ public:
                          const QString &starttime,
                          const QString &endtime,
                          const QString &description,
+                         const QString &track = QString(),
                          QObject *parent = 0);
     QVariant data(int role) const;
     QHash<int, QByteArray> roleNames() const;
@@ -98,6 +100,7 @@ public:
     inline QString starttime() const { return m_starttime; }
     inline QString endtime() const { return m_endtime; }
     inline QString description() const { return m_description; }
+    inline QString track() const { return m_track; }
 
 private:
     QString m_name;
@@ -105,12 +108,7 @@ private:
     QString m_starttime;
     QString m_endtime;
     QString m_description;
+    QString m_track;
 };
-
-
-
-
-
-
 
 #endif // SUMMITITEMS_H
