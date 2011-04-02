@@ -25,6 +25,9 @@ Item {
     signal openPrevScreen()
     signal openNextScreen(string screenName, string screenDate)
 
+    signal hideScreen()
+    signal showScreen()
+
     function hide() {
         console.log("Screen.hide");
         screen.state = 'hide';
@@ -60,6 +63,10 @@ Item {
                 y: isPortrait() ? 150 : 0
                 opacity: 1
             }
+            StateChangeScript{
+                id: show
+                script: screen.showScreen()
+            }
         },
         State {
             name: "hide"
@@ -68,6 +75,10 @@ Item {
                 x: isPortrait() ? -300 : x
                 y: isPortrait() ? y : -300
                 opacity: 0
+            }
+            StateChangeScript{
+                id: hide
+                script: screen.hideScreen()
             }
         }
     ]

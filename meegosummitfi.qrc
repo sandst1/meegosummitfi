@@ -16,5 +16,11 @@
         <file>qml/MeeGoSummitFI/ProgressDialog.qml</file>
         <file>qml/MeeGoSummitFI/Dialog.qml</file>
         <file>qml/MeeGoSummitFI/ScreenHeader.qml</file>
+        <file>qml/MeeGoSummitFI/StatusScreen.qml</file>
+        <file>qml/MeeGoSummitFI/TwitterModel.qml</file>
+        <file>qml/MeeGoSummitFI/TwitterDelegate.qml</file>
+        <file>images/loading.png</file>
+        <file>images/twitter_newbird_blue.png</file>
+        <file>qml/MeeGoSummitFI/ImageButton.qml</file>
     </qresource>
 </RCC>
