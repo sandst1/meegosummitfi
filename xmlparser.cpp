@@ -325,7 +325,11 @@ Q_INVOKABLE void XMLParser::updateCurrentSessions()
 
 
             // Use Day+Track Name to identify a list of sessions
-            trackName = dayName + ", " + trackName + " (" + trackLocation + ")";
+
+            // TODO: fix
+            //trackName = dayName + ", " + trackName + " (" + trackLocation + ")";
+
+
             //qDebug() << "Setting sessionsModel with the name " << trackName << ".";
             //m_lists[trackName] = sessionsModel;
 
@@ -347,9 +351,10 @@ Q_INVOKABLE void XMLParser::updateCurrentSessions()
                                                            sessionNode.namedItem("end").childNodes().at(0).nodeValue(),
                                                            sessionNode.namedItem("description").childNodes().at(0).nodeValue(),
                                                            "",
-                                                           sessionsModel);
+                                                           NULL); // TODO: Add parent
                 // Add the Session to the list model
-                sessionsModel->appendRow(sessionItem);
+                //sessionsModel->appendRow(sessionItem);
+                // TODO: use m_curSessions
             }
         }
     }
