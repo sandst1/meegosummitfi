@@ -54,6 +54,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.leftMargin: isPortrait() ? 78 : 0
         anchors.top: parent.top
+
     }
 
     Item {
@@ -120,6 +121,16 @@ Rectangle {
         }
         visible: curScreen == 0 ? true : false
     }
+    ImageButton{
+        id:status
+        anchors.bottom : parent.bottom
+        anchors.bottomMargin : 20
+        anchors.rightMargin: 20
+        anchors.right: parent.right
+        source: "../../images/twitter_newbird_blue.png"
+        onClicked: screenSwitcher.loadScreen(true, 3);
+        visible: curScreen == 0 ? true : false
+    }
 
     Connections {
         target: XMLParser
@@ -167,7 +178,14 @@ Rectangle {
             onOpenPrevScreen: {
                 screenSwitcher.loadScreen(false, 1);
             }
+        },
+        StatusScreen{
+            parent:  screenSwitcher
+            onOpenPrevScreen: {
+                screenSwitcher.loadScreen(false, 0);
+            }
         }
+
         //SessionScreen {}
     ]
 
@@ -175,7 +193,7 @@ Rectangle {
         console.log("ScreenSwitcher ready");
         screenSwitcher.curScreen = 0;
         screenSwitcher.prevScreen = 0;
-        for (var i = 0; i < 3; i++ ) {
+        for (var i = 0; i < 4; i++ ) {
             screens[i].hide();
         }
 
