@@ -38,6 +38,9 @@ signals:
 public slots:
     void programXMLDownloaded(QNetworkReply*);
 private:
+    bool isSessionCurrent(const QString& startTime, const QString& endTime);
+    bool hasSessionStarted(const QString& startTime);
+
     QDomDocument m_doc;
     QFile        m_xmlfile;
 

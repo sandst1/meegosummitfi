@@ -22,5 +22,7 @@
         <file>images/loading.png</file>
         <file>images/twitter_newbird_blue.png</file>
         <file>qml/MeeGoSummitFI/ImageButton.qml</file>
+        <file>qml/MeeGoSummitFI/CurrentSessionsDelegate.qml</file>
+        <file>qml/MeeGoSummitFI/CurrentSessionsScreen.qml</file>
     </qresource>
 </RCC>

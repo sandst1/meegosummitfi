@@ -5,4 +5,5 @@ Rectangle {
     height: 120
     width: parent.width
     color: "#181818" //"#3A3A3C"
-    }
+
+}

@@ -40,7 +40,8 @@ XMLParser::XMLParser(QDeclarativeContext* context, QObject *parent) :
     {
         qDebug("XMLParser: no need to update xml, calling parse()");
         parse();
-    }
+        updateCurrentSessions();
+    }    
 }
 
 XMLParser::~XMLParser()
@@ -147,6 +148,7 @@ void XMLParser::parse()
                                                            sessionNode.namedItem("end").childNodes().at(0).nodeValue(),
                                                            sessionNode.namedItem("description").childNodes().at(0).nodeValue(),
                                                            "",
+                                                           false,
                                                            sessionsModel);
                 // Add the Session to the list model
                 sessionsModel->appendRow(sessionItem);
@@ -242,6 +244,7 @@ void XMLParser::programXMLDownloaded(QNetworkReply* networkReply)
     }
 
     this->parse();
+    this->updateCurrentSessions();
 }
 
 Q_INVOKABLE void XMLParser::updateCurrentSessions()
@@ -249,19 +252,13 @@ Q_INVOKABLE void XMLParser::updateCurrentSessions()
     qDebug("XMLParser::updateCurrentSessions");
     if ( m_currentSessions )
     {
+        m_currentSessions->clear();
         delete m_currentSessions;
         m_currentSessions = NULL;
     }
 
 
     QDomElement docelem = m_doc.documentElement();
-
-    // TODO: Free the memory allocated by the lists
-    //m_lists.clear();
-    //m_daysModel->clear();
-   //delete m_daysModel;
-    //m_daysModel     = new ListModel(new DayItem, this);
-    //m_context->setContextProperty("daysModel", m_daysModel);
 
     qDebug() << "DocElem:" << docelem.tagName();
 
@@ -273,34 +270,19 @@ Q_INVOKABLE void XMLParser::updateCurrentSessions()
         QDomElement dayElem = days.at(i).toElement();
 
 
-// TODO: ENABLE THIS WHEN PARSING IS DONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //QString dayName = dayElem.attribute("name");
         QString xmlDate = dayElem.attribute("date");
         QString curDate = QDateTime::currentDateTime().toString("yyyy-MM-dd");
 
+        qDebug() << "XMLParser: Loaded day" << xmlDate << ", today: " << curDate;
+
         if ( xmlDate != curDate )
         {
-            qDebug("Nothing sessions ongoing");
-            //continue;
+            qDebug("No sessions ongoing");
+            continue;
         }
-// TODO: ENABLE THIS WHEN PARSING IS DONE^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-        // Create a model for the Tracks happening at this day
-        //ListModel* tracksModel = new ListModel(new TrackItem, this);
-        //m_lists[dayName] = tracksModel;
-
-        //DayItem *dayItem = new DayItem(dayName,
-        //                               dayElem.attribute("date"),
-        //                               m_daysModel);
-
-        qDebug() << "XMLParser: Loaded day" << curDate;
-
-        // Put the name to the day item's data so
-        // we know where to go next when the day is selected
-        //dayItem->setChildList(dayName);
-
-        // Add the day to the list model
-        //m_daysModel->appendRow(dayItem);
+        // Model for the current sessions
+        m_currentSessions = new ListModel(new SessionItem, this);
 
         // Get the data for the Tracks
         QDomNodeList tracks = day.childNodes();
@@ -313,30 +295,7 @@ Q_INVOKABLE void XMLParser::updateCurrentSessions()
             // Create a list item for the track
             QString trackName = trackElem.attribute("name");
             QString trackLocation = trackElem.attribute("location");
-            //TrackItem *trackItem = new TrackItem(trackName,
-            //                                     trackLocation,
-            //                                     tracksModel);
-
-            //qDebug() << "Found track " << dayName << ": " << trackName;
-
-            // Session model
-            m_currentSessions = new ListModel(new SessionItem, this);
-
-
-
-            // Use Day+Track Name to identify a list of sessions
-
-            // TODO: fix
-            //trackName = dayName + ", " + trackName + " (" + trackLocation + ")";
-
-
-            //qDebug() << "Setting sessionsModel with the name " << trackName << ".";
-            //m_lists[trackName] = sessionsModel;
-
-            //trackItem->setChildList(trackName);
-
-            // Add the Track to the list model
-            //tracksModel->appendRow(trackItem);
+            trackName += " (" + trackLocation + ")";
 
             // Get the Sessions for this Track
             QDomNodeList sessions = track.childNodes();
@@ -345,42 +304,109 @@ Q_INVOKABLE void XMLParser::updateCurrentSessions()
                 QDomNode sessionNode = sessions.at(k);
                 QDomElement sessionElem = sessionNode.toElement();
 
-                SessionItem *sessionItem = new SessionItem(sessionElem.attribute("name"),
-                                                           sessionElem.attribute("speaker"),
-                                                           sessionNode.namedItem("start").childNodes().at(0).nodeValue(),
-                                                           sessionNode.namedItem("end").childNodes().at(0).nodeValue(),
-                                                           sessionNode.namedItem("description").childNodes().at(0).nodeValue(),
-                                                           "",
-                                                           NULL); // TODO: Add parent
-                // Add the Session to the list model
-                //sessionsModel->appendRow(sessionItem);
-                // TODO: use m_curSessions
+                QString startTime = sessionNode.namedItem("start").childNodes().at(0).nodeValue();
+                QString endTime   = sessionNode.namedItem("end").childNodes().at(0).nodeValue();
+
+                // In the case the whole track hasn't started,
+                // just take the first session and move on
+                if ( k == 0 && !(hasSessionStarted(startTime)) )
+                {
+                    qDebug("SESSION HASN't STARTED!!!");
+
+                    SessionItem *sessionItem = new SessionItem(sessionElem.attribute("name"),
+                                                               sessionElem.attribute("speaker"),
+                                                               startTime,
+                                                               endTime,
+                                                               sessionNode.namedItem("description").childNodes().at(0).nodeValue(),
+                                                               trackName,
+                                                               true,
+                                                               m_currentSessions);
+
+                    // Add the Session to the list mode
+                    m_currentSessions->appendRow(sessionItem);
+
+                    // Move to next track
+                    break;
+                }
+
+                if ( this->isSessionCurrent(startTime, endTime) )
+                {
+                    // Take the current and next session for this track
+                    SessionItem *sessionItem = new SessionItem(sessionElem.attribute("name"),
+                                                               sessionElem.attribute("speaker"),
+                                                               startTime,
+                                                               endTime,
+                                                               sessionNode.namedItem("description").childNodes().at(0).nodeValue(),
+                                                               trackName,
+                                                               false,
+                                                               m_currentSessions);
+
+                    // Add the Session to the list mode
+                    m_currentSessions->appendRow(sessionItem);
+
+                    // Take the next session of the track only if there is a next session
+                    if ( (k+1) < sessions.size() )
+                    {
+                        sessionNode = sessions.at(k+1);
+                        sessionElem = sessionNode.toElement();
+                        sessionItem = new SessionItem(sessionElem.attribute("name"),
+                                                      sessionElem.attribute("speaker"),
+                                                      sessionNode.namedItem("start").childNodes().at(0).nodeValue(),
+                                                      sessionNode.namedItem("end").childNodes().at(0).nodeValue(),
+                                                      sessionNode.namedItem("description").childNodes().at(0).nodeValue(),
+                                                      trackName,
+                                                      false,
+                                                      m_currentSessions);
+
+                        // Add the Session to the list mode
+                        m_currentSessions->appendRow(sessionItem);
+                    }
+
+                    // Time to break
+                    break;
+                }
             }
         }
     }
 
 
 
+    // Publish the current sessions to the QML side
+    m_context->setContextProperty("currentSessionsModel", m_currentSessions);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    qDebug("XMLParser::updateCurrentSessions");
+    qDebug("XMLParser::updateCurrentSessions exit");
 
 }
 
+//var curDate = Qt.formatDateTime(new Date(), "yyyy-MM-dd")
 
+//if ( curDate.toString() == trackScreen.date )
+//{
+//    var curTime = Qt.formatDateTime(new Date(), "hh:mm");
+//    if ( startTime <= curTime && endTime > curTime ) {
+//        return true;
+//    }
+//    else {
+//        return false;
+//    }
 
+bool XMLParser::isSessionCurrent(const QString &startTime, const QString &endTime)
+{
+    QTime start = QTime::fromString(startTime, "hh:mm");
+    QTime end   = QTime::fromString(endTime, "hh:mm");
+    QTime cur   = QTime::currentTime();
 
+    if ( start <= cur && end > cur )
+        return true;
 
+    return false;
+}
 
+bool XMLParser::hasSessionStarted(const QString& startTime)
+{
+    QTime start = QTime::fromString(startTime, "hh:mm");
+    QTime cur   = QTime::currentTime();
+    if ( cur < start )
+        return false;
+    return true;
+}

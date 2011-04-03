@@ -80,7 +80,8 @@ public:
         StartTimeRole,
         EndTimeRole,
         DescriptionRole,
-        TrackRole
+        TrackRole,
+        FirstSessionRole
     };
 
 public:
@@ -91,6 +92,7 @@ public:
                          const QString &endtime,
                          const QString &description,
                          const QString &track = QString(),
+                         bool firstSessionOfTrack = false,
                          QObject *parent = 0);
     QVariant data(int role) const;
     QHash<int, QByteArray> roleNames() const;
@@ -101,14 +103,16 @@ public:
     inline QString endtime() const { return m_endtime; }
     inline QString description() const { return m_description; }
     inline QString track() const { return m_track; }
+    inline bool firstSession() const { return m_firstSession; }
 
 private:
     QString m_name;
     QString m_speaker;
     QString m_starttime;
     QString m_endtime;
-    QString m_description;
+    QString m_description;    
     QString m_track;
+    bool    m_firstSession;
 };
 
 #endif // SUMMITITEMS_H

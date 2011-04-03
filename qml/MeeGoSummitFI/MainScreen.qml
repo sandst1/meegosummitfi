@@ -4,21 +4,44 @@ Screen {
     id: mainScreen   
 
     Column {
+        id: listColumn
         anchors.top: parent.top
-        anchors.topMargin: 80
+        //anchors.topMargin: 40
         anchors.horizontalCenter: parent.horizontalCenter
         width: parent.width
-        height: parent.height
+        height: 240
 
         ListView {
             id: mainView
             boundsBehavior: Flickable.StopAtBounds
 
             width: parent.width
-            height: parent.height - summitLogo.height            
+            height: 200
             model: daysModel
             delegate: DaysDelegate {
                 id: daysDelegate;
+            }
+        }
+    }
+
+    MenuItem {
+        id: curSessions
+        anchors.top: listColumn.bottom
+
+
+        MenuText {
+            width: parent.width*0.75
+            id: dayName
+            text: "Now and next";
+            color: "#1476bb"
+            anchors.verticalCenter: parent.verticalCenter
+        }
+
+        MouseArea {
+            anchors.fill: parent;
+
+            onPressed: {
+                screenSwitcher.loadScreen(true, 4, "Now and next", "");
             }
         }
     }

@@ -156,20 +156,24 @@ Rectangle {
             }
         },
         StatusScreen{
-            parent:  screenSwitcher
+            parent: screenSwitcher
+            onOpenPrevScreen: {
+                screenSwitcher.loadScreen(false, 0);
+            }
+        },
+        CurrentSessionsScreen {
+            parent: screenSwitcher
             onOpenPrevScreen: {
                 screenSwitcher.loadScreen(false, 0);
             }
         }
-
-        //SessionScreen {}
     ]
 
     Component.onCompleted: {
         console.log("ScreenSwitcher ready");
         screenSwitcher.curScreen = 0;
         screenSwitcher.prevScreen = 0;
-        for (var i = 0; i < 4; i++ ) {
+        for (var i = 0; i < 5; i++ ) {
             screens[i].hide();
         }
 
