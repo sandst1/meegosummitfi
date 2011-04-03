@@ -128,7 +128,8 @@ Rectangle {
         anchors.rightMargin: 20
         anchors.right: parent.right
         source: "../../images/twitter_newbird_blue.png"
-        onClicked: screenSwitcher.loadScreen(true, 3);
+
+        onClicked: screenSwitcher.loadScreen(true, 3, "#meegofi", Qt.formatDateTime(Date(), "dd.MM.yy"));
         visible: curScreen == 0 ? true : false
     }
 
