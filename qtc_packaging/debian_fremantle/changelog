@@ -1,5 +1,11 @@
 meegosummitfi (0.0.1) unstable; urgency=low
 
-  * Initial Release.
+  * Release 0.0.1
 
- -- Topi <topi@unknown>  Sun, 20 Mar 2011 10:35:04 +0200
+ -- Topi <topi.santakivi@gmail.com>  Sun, 03 Apr 2011 23:02:17 +0300
+
+meegosummitfi (0.0.1pre) unstable; urgency=low
+
+  * Initial Release
+
+ -- Topi <topi.santakivi@gmail.com>  Sun, 20 Mar 2011 10:35:04 +0200
