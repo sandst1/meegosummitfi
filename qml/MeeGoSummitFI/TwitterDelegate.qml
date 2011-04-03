@@ -3,7 +3,7 @@ import Qt 4.7
 Component {
     id: listDelegate
     Item {
-        id: wrapper; width: wrapper.ListView.view.width; height: if(txt.height > 60){txt.height+10}else{60} //50+5+5
+        id: wrapper; width: wrapper.ListView.view.width; height: if(txt.height + user.height > 60){txt.height+user.height+10}else{60} //50+5+5
         function handleLink(link){
             if(link.slice(0,3) == 'app'){
                 screen.setUser(link.slice(7));
@@ -23,6 +23,27 @@ Component {
             return user.trim();
         }
 
+        function userDisplay(str){
+            if (str.length>25){
+                return userName(str);
+            }
+            else{
+                return str;
+            }
+        }
+
+        function displayTime(str){
+            var tmp = str.replace(/T/," ")
+            var tmp2 = tmp.replace(/Z/,"")
+            var m_time = new Date(tmp2.replace(/-/g,"/"));
+            //console.log(tmp2.replace(/-/g,"/"))
+
+            //console.log(Qt.formatDateTime(m_time, "dd.MM.yy HH:mm"))
+
+            return Qt.formatDateTime(m_time, "dd.MM.yy HH:mm")
+
+        }
+
         Item {
             id: moveMe; height: parent.height
             Rectangle {
@@ -31,7 +52,8 @@ Component {
             }
             Item {
                 id: image; x: 6; width: 48; height: 48; smooth: true
-                anchors.verticalCenter: parent.verticalCenter
+//                anchors.verticalCenter: parent.verticalCenter
+                anchors.top: parent.top
                 Image {
                     x: 1; y: 1; width: 48; height: 48; visible: realImage.status != Image.Ready
                     id: loading; source: "../../images/loading.png"
@@ -58,12 +80,25 @@ Component {
             }
             StyledText { id:txt; y:4; x: 56
                 text: '<html><style type="text/css">a:link {color:"#552987"}; a:visited {color:"#57585b"}</style>'
-                    + '<a href="app://@'+userName(name)+'"><b>'+userName(name) + "</b></a> from " +source
-                    + "<br /><b>" + statusText + "</b></html>";
+                        + "<b>" + statusText + "</b></html>";
                 textFormat: Qt.RichText
                 color: "#cccccc"; style: Text.Raised; styleColor: "black"; wrapMode: Text.WordWrap
                 anchors.left: image.right; anchors.right: blackRect.right; anchors.leftMargin: 6; anchors.rightMargin: 6
                 onLinkActivated: wrapper.handleLink(link)
+            }
+            StyledText{
+                id: user
+                text: userDisplay(name)
+                anchors.bottom: blackRect.bottom
+                anchors.left: blackRect.left
+                color:  "#57585b"
+            }
+            StyledText{
+                id: time
+                text: displayTime( timestamp)
+                anchors.bottom: blackRect.bottom
+                anchors.right: blackRect.right
+                color:  "#57585b"
             }
         }
     }
