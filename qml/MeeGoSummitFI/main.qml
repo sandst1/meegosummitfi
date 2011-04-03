@@ -78,7 +78,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottomMargin: 20
         width: 300
-        height: 75
+        height: 50
     }
 
     TextButton {

@@ -27,7 +27,7 @@ Screen {
     MenuItem {
         id: curSessions
         anchors.top: listColumn.bottom
-
+        height: 100
 
         MenuText {
             width: parent.width*0.75

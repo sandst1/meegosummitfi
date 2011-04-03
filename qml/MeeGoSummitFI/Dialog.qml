@@ -70,7 +70,7 @@ Rectangle {
     height: 200
     opacity: 0
     radius: 10
-    border.width: 10
+    border.width: 5
     border.color: "#1476bb"
     color: "white"
 
