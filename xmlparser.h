@@ -47,12 +47,13 @@ public:
 
     Q_INVOKABLE bool updateXML(bool forceUpdate);
 
-    Q_INVOKABLE void updateCurrentSessions();
+    Q_INVOKABLE void updateCurrentSessions(bool sendCompleteNotification);
 
 signals:
     void dataAvailable();
     void dataUpdateFailed();
     void startingDataUpdate();
+    void currentSessionsUpdated();
 public slots:
     void programXMLDownloaded(QNetworkReply*);
 private:

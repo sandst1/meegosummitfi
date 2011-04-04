@@ -60,9 +60,15 @@ Screen {
             anchors.fill: parent;
 
             onPressed: {
-                screenSwitcher.loadScreen(true, 4, "Now and next", "");
+                XMLParser.updateCurrentSessions(true);
             }
         }
     }
+
+    Connections {
+        target: XMLParser
+        onCurrentSessionsUpdated: screenSwitcher.loadScreen(true, 4, "Now and next", "")
+    }
+
     Component.onCompleted: console.log("MainScreen loaded")
 }

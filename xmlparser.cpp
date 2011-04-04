@@ -58,7 +58,7 @@ XMLParser::XMLParser(QDeclarativeContext* context, QObject *parent) :
     {
         qDebug("XMLParser: no need to update xml, calling parse()");
         parse();
-        updateCurrentSessions();
+        updateCurrentSessions(false);
     }    
 }
 
@@ -262,10 +262,10 @@ void XMLParser::programXMLDownloaded(QNetworkReply* networkReply)
     }
 
     this->parse();
-    this->updateCurrentSessions();
+    this->updateCurrentSessions(false);
 }
 
-Q_INVOKABLE void XMLParser::updateCurrentSessions()
+Q_INVOKABLE void XMLParser::updateCurrentSessions(bool sendCompleteNotification)
 {
     qDebug("XMLParser::updateCurrentSessions");
     if ( m_currentSessions )
@@ -391,6 +391,9 @@ Q_INVOKABLE void XMLParser::updateCurrentSessions()
 
     // Publish the current sessions to the QML side
     m_context->setContextProperty("currentSessionsModel", m_currentSessions);
+
+    if ( sendCompleteNotification )
+        emit this->currentSessionsUpdated();
 
     qDebug("XMLParser::updateCurrentSessions exit");
 
