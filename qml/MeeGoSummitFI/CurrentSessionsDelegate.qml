@@ -83,6 +83,8 @@ MenuItem {
                     text: speaker
                     color: "#54b87b"
                     visible:  speaker == "" ? "false" : "true"
+                    wrapMode: Text.WordWrap
+                    width: parent.width - (sessionBar.width + sessionTime.width + 30)
                 }
             }
         }
