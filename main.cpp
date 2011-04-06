@@ -48,14 +48,28 @@ int main(int argc, char *argv[])
     context->setContextProperty("XMLParser", &xmlparser);
 
     context->setContextProperty("daysModel", xmlparser.getDaysModel());
-
     context->setContextProperty("tracksModel", NULL);
     context->setContextProperty("sessionsModel", NULL);
 
+    context->setContextProperty("appViewer", &viewer);
+
     viewer.setResizeMode(QDeclarativeView::SizeRootObjectToView);
-    viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
+    viewer.setOrientation((int)(QmlApplicationViewer::ScreenOrientationAuto));
     viewer.setSource(QUrl("qrc:/qml/MeeGoSummitFI/main.qml"));
 
+
+/*
+#ifdef Q_WS_MAEMO_5
+    QOrientationSensor sensor;
+    OrientationFilter filter;
+    sensor.addFilter(&filter);
+
+    // Connect the Qt signal to QML function
+    QObject::connect(&filter, SIGNAL(orientationChanged(const QVariant&)), viewer.rootObject(), SLOT(orientationChanged(const QVariant&)));
+
+    sensor.start();
+#endif
+*/
     viewer.showExpanded();
 
     return app.exec();

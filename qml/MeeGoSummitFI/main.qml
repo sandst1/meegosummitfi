@@ -88,7 +88,7 @@ Rectangle {
         onClicked:  {
             screens[curScreen].openPrevScreen();
         }
-        visible: curScreen > 0 ? true : false
+        visible: curScreen > 0 && curScreen != 5 ? true : false
     }
 
     ProgressDialog {
@@ -116,6 +116,23 @@ Rectangle {
         }
         visible: curScreen == 0 ? true : false
     }
+
+    TextButton {
+        id: showMapBtn
+        anchors.bottom : parent.bottom
+        anchors.bottomMargin : 20
+        anchors.left: parent.left
+        anchors.leftMargin: 20
+
+        text: "Map"
+
+        visible: curScreen == 0 ? true : false
+        onClicked:   {
+            appViewer.setOrientation(1); // ScreenOrientationLockLandscape
+            screenSwitcher.loadScreen(true, 5, "Tampere map", "")
+        }
+    }
+
     ImageButton{
         id:status
         anchors.bottom : parent.bottom
@@ -142,7 +159,7 @@ Rectangle {
         screens[prevScreen].hide();
         screens[curScreen].show();
 
-        if ( curScreen > 0 ) {
+        if ( curScreen > 0 && curScreen != 5) {
             updateXMLBtn.visible = false
         } else {
             updateXMLBtn.visible = true
@@ -186,14 +203,22 @@ Rectangle {
             onOpenPrevScreen: {
                 screenSwitcher.loadScreen(false, 0);
             }
+        },
+        MapScreen {
+            id: tampereMap
+            parent: screenSwitcher
+            onOpenPrevScreen: {
+                screenSwitcher.loadScreen(false, 0);
+            }
         }
+
     ]
 
     Component.onCompleted: {
         console.log("ScreenSwitcher ready");
         screenSwitcher.curScreen = 0;
         screenSwitcher.prevScreen = 0;
-        for (var i = 0; i < 5; i++ ) {
+        for (var i = 0; i < 6; i++ ) {
             screens[i].hide();
         }
 

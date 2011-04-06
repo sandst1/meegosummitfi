@@ -24,5 +24,7 @@
         <file>qml/MeeGoSummitFI/ImageButton.qml</file>
         <file>qml/MeeGoSummitFI/CurrentSessionsDelegate.qml</file>
         <file>qml/MeeGoSummitFI/CurrentSessionsScreen.qml</file>
+        <file>images/map.png</file>
+        <file>qml/MeeGoSummitFI/MapScreen.qml</file>
     </qresource>
 </RCC>
