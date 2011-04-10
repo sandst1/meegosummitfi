@@ -69,7 +69,7 @@ Rectangle {
     signal clicked
 
     color: "#AFAFAF"
-    width: label.width + 70
+    width: label.width + 50
     height: label.height + 15
     radius: 10
 

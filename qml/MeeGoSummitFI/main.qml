@@ -75,21 +75,73 @@ Rectangle {
         }
     }
 
-    TextButton {
-        id:backbtn
-        anchors {
-            left: parent.left;
-            bottom: parent.bottom;
-            bottomMargin: 10;
-            leftMargin: isPortrait() ? 10 : 115
-        }
-        text: "Back"
+//        spacing: parent.width/2-updateXMLBtn.width/2-showMapBtn.width/2-status.width/2-10
+//        width: parent.width
+//        height: backbtn.height
+//        anchors.bottom: parent.bottom
+        TextButton {
+            id:backbtn
+            anchors {
+                left: parent.left;
+                bottom: parent.bottom;
+                bottomMargin: 20;
+                leftMargin: isPortrait() ? 20 : 115
+            }
+            text: "Back"
 
-        onClicked:  {
-            screens[curScreen].openPrevScreen();
+            onClicked:  {
+                screens[curScreen].openPrevScreen();
+            }
+            visible: curScreen > 0 && curScreen != 5 ? true : false
         }
-        visible: curScreen > 0 && curScreen != 5 ? true : false
-    }
+        TextButton {
+            id: showMapBtn
+            anchors.bottom : parent.bottom
+            anchors.bottomMargin : 20
+            anchors.left: parent.left
+            anchors.leftMargin: 20
+
+            text: "Map"
+
+            visible: curScreen == 0 ? true : false
+            onClicked:   {
+                appViewer.setOrientation(1); // ScreenOrientationLockLandscape
+                screenSwitcher.loadScreen(true, 5, "Tampere map", "")
+            }
+        }
+
+
+        TextButton {
+            id: updateXMLBtn
+            anchors.bottom : parent.bottom
+            anchors.bottomMargin : 20
+            anchors.horizontalCenter: parent.horizontalCenter
+            //anchors.leftMargin: 20
+            text: "Update program"
+
+            onClicked:  {
+                console.log("UpdateXMLBtn pressed");
+                updateXMLDialog.show("Updating the program...");
+                XMLParser.updateXML(true);
+                updateXMLBtn.visible = false;
+            }
+            visible: curScreen == 0 ? true : false
+        }
+
+        ImageButton{
+            id:status
+            height: updateXMLBtn.height+10
+            width: height
+            anchors.bottom : parent.bottom
+            anchors.bottomMargin : 20
+            anchors.rightMargin: 20
+            anchors.right: parent.right
+            fillMode: Image.PreserveAspectFit
+            source: "../../images/twitter_newbird_blue.png"
+
+            onClicked: screenSwitcher.loadScreen(true, 3, "#meegofi", Qt.formatDateTime(Date(), "dd.MM.yy"));
+            visible: curScreen == 0 ? true : false
+        }
 
     ProgressDialog {
         id: updateXMLDialog;
@@ -99,52 +151,6 @@ Rectangle {
         width: 300
         height: 50
     }
-
-    TextButton {
-        id: updateXMLBtn
-        anchors.bottom : parent.bottom
-        anchors.bottomMargin : 20
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        text: "Update program"
-
-        onClicked:  {
-            console.log("UpdateXMLBtn pressed");
-            updateXMLDialog.show("Updating the program...");
-            XMLParser.updateXML(true);
-            updateXMLBtn.visible = false;
-        }
-        visible: curScreen == 0 ? true : false
-    }
-
-    TextButton {
-        id: showMapBtn
-        anchors.bottom : parent.bottom
-        anchors.bottomMargin : 20
-        anchors.left: parent.left
-        anchors.leftMargin: 20
-
-        text: "Map"
-
-        visible: curScreen == 0 ? true : false
-        onClicked:   {
-            appViewer.setOrientation(1); // ScreenOrientationLockLandscape
-            screenSwitcher.loadScreen(true, 5, "Tampere map", "")
-        }
-    }
-
-    ImageButton{
-        id:status
-        anchors.bottom : parent.bottom
-        anchors.bottomMargin : 20
-        anchors.rightMargin: 20
-        anchors.right: parent.right
-        source: "../../images/twitter_newbird_blue.png"
-
-        onClicked: screenSwitcher.loadScreen(true, 3, "#meegofi", Qt.formatDateTime(Date(), "dd.MM.yy"));
-        visible: curScreen == 0 ? true : false
-    }
-
     Connections {
         target: XMLParser
         onStartingDataUpdate: updateXMLDialog.show("Downloading the program...")

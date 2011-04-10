@@ -23,6 +23,8 @@ Screen {
     id: mapScreen
     width: 800
     height: 480
+    //x: 0
+    //y: 0
     anchors.fill: parent
     anchors.centerIn: parent
 
@@ -34,22 +36,51 @@ Screen {
 
         Image { id: image; source: "../../images/map.png" }
     }
-
-    Rectangle {
-        color: "#181818"
-        anchors.bottom: parent.bottom
-        width: 200; height: 100
-        StyledText {
-            color: "#FFFFFF"
-            text: "Back"
+    Rectangle{
+        color: "black"
+        anchors {
+        left: parent.left;
+        bottom: parent.bottom;
+        bottomMargin: 18;
+        leftMargin: 18;
         }
-        MouseArea {
-            onPressed: { console.log("onPressed"); }
-            onReleased: { console.log("onReleased"); }
-            onCanceled: { console.log("onCanceled"); }
-            //onClicked: {
-                //mapScreen.openPrevScreen();
-                //appViewer.setOrientation(2); // ScreenOrientationAuto
+        width: mapBack.width+4
+        height: mapBack.height+4
+        radius: 10
+    }
+
+    TextButton{
+        id: mapBack
+        anchors {
+            left: parent.left;
+            bottom: parent.bottom;
+            bottomMargin: 20;
+            leftMargin: 20;
+        }
+        text: "Back"
+
+        onClicked:  {
+            mapScreen.switchToPrevScreen();
+            appViewer.setOrientation(2); // ScreenOrientationAuto
         }
     }
+
+//    Rectangle {
+//        color: "#181818"
+//        anchors.bottom: parent.bottom
+//        width: 200; height: 100
+//        StyledText {
+//            color: "#FFFFFF"
+//            text: "Back"
+//        }
+//        MouseArea {
+//            anchors.fill: parent
+//            onPressed: { console.log("onPressed"); }
+//            onReleased: { console.log("onReleased"); }
+//            onCanceled: { console.log("onCanceled"); }
+//            //onClicked: {
+//                //mapScreen.openPrevScreen();
+//                //appViewer.setOrientation(2); // ScreenOrientationAuto
+//        }
+//    }
 }

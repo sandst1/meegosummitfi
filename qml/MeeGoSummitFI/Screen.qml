@@ -34,7 +34,7 @@ Item {
 
     id: screen
     width: isPortrait() ? parent.width : parent.width * 0.55
-    height: isPortrait() ? parent.height - 210 : parent.height
+    height: isPortrait() ? parent.height - 220 : parent.height
     x: isPortrait() ? -300 : 340
     y: isPortrait() ? 150 : -300
     opacity: 1
