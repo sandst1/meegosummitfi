@@ -29,7 +29,8 @@ Item { id: wrapper
     XmlListModel {
         id: xmlModel
 
-        source: "http://search.twitter.com/search.atom?q="+phrase
+        //source: "http://search.twitter.com/search.atom?q=%23meegofi"
+        source:"http://search.twitter.com/search.atom?tag="+phrase
 
         namespaceDeclarations: "declare default element namespace 'http://www.w3.org/2005/Atom'; " +
                                "declare namespace twitter=\"http://api.twitter.com/\";";
@@ -47,5 +48,19 @@ Item { id: wrapper
         property: "mode"
         target: wrapper
         value: {if(wrapper.tags==''){"everyone";}else if(wrapper.tags=='my timeline'){"self";}else{"user";}}
+    }
+
+    onStatusChanged: {
+         if(status == XmlListModel.Ready) {
+            console.debug("FeedViewModel Status: ready")
+         } else if(status == XmlListModel.Error) {
+            console.debug("FeedViewModel Status: error")
+         } else if(status == XmlListModel.Loading) {
+            console.debug("FeedViewModel Status: loading")
+         }
+    }
+
+    onPhraseChanged: {
+       console.debug("Feed url changed: "+xmlModel.source)
     }
 }
