@@ -75,7 +75,7 @@ Screen {
                 }
         }
     }
-    onHideScreen: reload.stop
+    onHideScreen: reload.stop()
     onShowScreen: {
         meegofi.reload();
         reload.start();
