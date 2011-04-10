@@ -29,7 +29,7 @@ Screen {
 
     Timer {
         id:reload
-        interval: 1000
+        interval: 60000
         onTriggered: {
             setActiveEvent()
             meegofi.reload
