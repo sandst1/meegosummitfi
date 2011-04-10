@@ -51,6 +51,7 @@ Screen {
 
     TextButton{
         id: mapBack
+        color: "#FFFFFF"
         anchors {
             left: parent.left;
             bottom: parent.bottom;
