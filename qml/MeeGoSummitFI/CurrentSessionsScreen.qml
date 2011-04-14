@@ -48,4 +48,18 @@ Screen {
             }
         }
     }
+
+    Timer {
+        id:sessionUpdateTimer
+        interval: 60000
+        onTriggered: {
+            XMLParser.updateCurrentSessions(true);
+        }
+        repeat: true
+    }
+
+    onHideScreen: sessionUpdateTimer.stop()
+    onShowScreen: sessionUpdateTimer.start()
 }
+
+
