@@ -205,6 +205,7 @@ Rectangle {
             }
         },
         CurrentSessionsScreen {
+            id: currentSessionsScreen
             parent: screenSwitcher
             onOpenPrevScreen: {
                 screenSwitcher.loadScreen(false, 0);

@@ -271,8 +271,8 @@ Q_INVOKABLE void XMLParser::updateCurrentSessions(bool sendCompleteNotification)
     if ( m_currentSessions )
     {
         m_currentSessions->clear();
-        delete m_currentSessions;
-        m_currentSessions = NULL;
+        //delete m_currentSessions;
+        //m_currentSessions = NULL;
     }
 
 
@@ -387,10 +387,9 @@ Q_INVOKABLE void XMLParser::updateCurrentSessions(bool sendCompleteNotification)
         }
     }
 
-
-
     // Publish the current sessions to the QML side
     m_context->setContextProperty("currentSessionsModel", m_currentSessions);
+
 
     if ( sendCompleteNotification )
         emit this->currentSessionsUpdated();

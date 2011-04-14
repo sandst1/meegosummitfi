@@ -67,7 +67,9 @@ Screen {
 
     Connections {
         target: XMLParser
-        onCurrentSessionsUpdated: screenSwitcher.loadScreen(true, 4, "Now and next", "")
+        onCurrentSessionsUpdated: {
+            screenSwitcher.loadScreen(true, 4, "Now and next", "");
+        }
     }
 
     Component.onCompleted: console.log("MainScreen loaded")
